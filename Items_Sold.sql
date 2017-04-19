@@ -3,7 +3,7 @@ create table Items_Sold (
 	No_Sold INT,
 	Date_Sold DATE
 );
-insert into Items_Sold (Item_ID, No_Sold, Date_Sold) values (1, 99, '1/16/2017');
+insert into Items_Sold (Item_ID, No_Sold, Date_Sold) values (1, 99, '1000/12/02');
 insert into Items_Sold (Item_ID, No_Sold, Date_Sold) values (2, 96, '6/3/2016');
 insert into Items_Sold (Item_ID, No_Sold, Date_Sold) values (3, 56, '9/7/2016');
 insert into Items_Sold (Item_ID, No_Sold, Date_Sold) values (4, 56, '2/7/2017');
