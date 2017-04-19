@@ -1,5 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html XMLns="http://www.w3.org/1999/xHTML">
 <head>
 	<title>Add Sales</title>
 	<meta charset="utf-8" />
@@ -7,7 +8,6 @@
 	<link href="css/bootstrap.min.css" rel="stylesheet" />
 	<link href="css/add-sales.css" rel="stylesheet" />
 </head>
-<!--<HTML XMLns="http://www.w3.org/1999/xHTML"> -->
 <body>
 <nav class="navbar navbar-default" role="navigation">
 <div class="container-fluid">
@@ -46,19 +46,42 @@
 	</div><!-- /.navbar-collapse -->
 </div><!-- /.container-fluid -->
 </nav>
-<div class="container">
-<H1>Add Sales Record</H1>
-<br/>
 
-<form>
-	Product code: <input type="text" name="pcode"> <br/>
-	Description: <input type="text" name="description"> <br/>
-	Quantity: <input type="text" name="quantity"> <br/>
-	RRP: <input type="email" name="rrp"> <br/>
-	Total: <input type="text" name="total"> <br/><br/>
-	<input type="submit" value="Submit" /> <br/>
-</form>
-</div>
+<div class="container">
+		<form>
+			<div class="form-row"><H1>Add Sales Record</H1></div>
+			<div class="form-row">
+				<label for="pcode">Product code</label>
+				<input type="text" class="form-control" name="pcode" id="pcode" />
+			</div>
+			<div class="form-row">
+				<label for="description">Description</label>
+				<input type="text" class="form-control" name="description" id="description" />
+			</div>
+			<div class="form-row">
+				<label for="description">Quantity</label>
+				<input type="number" class="form-control" name="quantity" id="quantity" />
+			</div>
+			<div class="form-row">
+				<label for="rrp">RRP</label>
+				<div class="input-group">
+						<span class="input-group-addon">$</span>
+						<input type="number" pattern="[0-9]+([,\.][0-9]+)?" placeholder="0" min="0" step="0.05" data-number-to-fixed="2" data-number-stepfactor="100" class="form-control currency" id="rrp" />
+				</div>
+			</div>
+			<div class="form-row">
+				<label for="total">Total</label>
+				<div class="input-group">
+						<span class="input-group-addon">$</span>
+						<input type="number" pattern="[0-9]+([,\.][0-9]+)?" placeholder="0" min="0" step="0.05" data-number-to-fixed="2" data-number-stepfactor="100" class="form-control currency" id="total" />
+				</div>
+			</div>
+			<br/>
+			<div class="form-row">
+				<button type="submit" class="btn btn-primary">Submit</button>
+			</div>
+		</form>
+</div><!-- /.form-container -->
 	<script src="js/jquery.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/angular.min.js"></script>
@@ -93,5 +116,4 @@
 		//  echo "<p>Please enter your name and phone number and click the Register button.</p>";
 		//}
 ?>
-<!--</HTML>-->
 </html>
