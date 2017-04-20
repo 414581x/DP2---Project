@@ -34,8 +34,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <br/>
 
 <form action="" method="post">
-  Staff Number: <input type="text" name="staffno"><span class="error">* <?php echo $nameErr;?></span> <br/> 
-  Password: <input type="text" name="lpassword"> <span class="error">* <?php echo $passErr;?></span> <br/> 
+  Staff Number: <input type="text" name="staffno"><span class="error"></span> <br/> 
+  Password: <input type="text" name="lpassword"> <span class="error"></span> <br/> 
   
   <input type="submit" value="Login" /> <br/>
 </form>
