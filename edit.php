@@ -11,9 +11,10 @@
 <body>
 
 <?php 
-
+$InvoiceNumber = $_GET['InvoiceNumber'];
   // define variables and set to empty values
   $totalpriceErr = "";
+  //$InvoiceNumber = "";
   $staffno = $saledate = $totalprice = "";
 
   if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -21,7 +22,7 @@
   
       //$inum = isset($_POST['inum']) ? $_POST['inum'] : "";
   
-
+  		
   //statement to see if password field is empty. If it is, populate error variable. If not, put data into password variable
 
      $staffno = isset($_POST['staffno']) ? $_POST['staffno'] : "";
@@ -82,7 +83,7 @@
 
 <div class="container">
 		<form action="" method="post">
-			<div class="form-row"><H1>Add Sales Record</H1></div>
+			<div class="form-row"><H1>Edit Sales Record</H1></div>
 	<div class="form-row">
 				<label for="staffno">Staff Number</label>
 				<input type="number" class="form-control" name="staffno" id="staffno" />
@@ -100,7 +101,7 @@
 			</div>
 			<br/>
 			<div class="form-row">
-				<button type="submit" class="btn btn-primary">Submit</button>
+				<button type="submit" class="btn btn-primary">Update</button>
 			</div>
 		</form>
 </div><!-- /.form-container -->
@@ -130,15 +131,15 @@
   
   
       //SQL statement to insert new record of user
-      $sql = "INSERT INTO Sales (SalesDate, StaffNo, TotalPrice)
-      VALUES ('$saledate', $staffno, $totalprice)";
+      $sql = "UPDATE Sales SET SalesDate = '$saledate', StaffNo = '$staffno', TotalPrice='$totalprice' WHERE InvoiceNumber = $InvoiceNumber";
+      
   
 
       if($conn->query($sql) === TRUE){
-       echo "Sales Record successfully added.";
+       echo "Sales Record successfully updated.";
       }
       else {
-        echo "ERROR: Could not execute insert." . $conn->error;
+        echo "ERROR: Could not execute update." . $conn->error;
       }
  
   $conn->close();

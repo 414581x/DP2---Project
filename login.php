@@ -56,9 +56,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       <li class="dropdown active">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">SALES <span class="caret"></span></a>
         <ul class="dropdown-menu" role="menu">
-          <li><a href="addstock.php">ADD SALES</a></li>
-          <li><a href="edit-sales.html">EDIT SALES</a></li>
-          <li><a href="display-sales.html">DISPLAY SALES</a></li>
+         <li><a href="addsales.php">ADD SALES</a></li>
+          <li><a href="edit.php">EDIT SALES</a></li>
+          <li><a href="viewsales.php">DISPLAY SALES</a></li>
         </ul>
       </li>
       <li><a href="#">GOODS RECEIVED</a></li>
