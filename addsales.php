@@ -18,7 +18,7 @@ $default = $_SESSION['$login_user'];
 echo $default;
 
   // define variables and set to empty values
-  $totalpriceErr = "";
+  $totalpriceErr = $saledateErr = "";
   $staffno = $saledate = $totalprice = "";
 
   if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -33,13 +33,21 @@ echo $default;
   
 
   //statement to see if password confirmation field is empty. If it is, populate error variable. If not, put data into confirmation password variable
- 
-     $saledate = isset($_POST['saledate']) ? $_POST['saledate'] : "";
+ if (empty($_POST['saledate'])) {
+      $saledateErr = "Sale Date is required";
+    } else {
+      $saledate = isset($_POST['saledate']) ? $_POST['saledate'] : "";
+  }
+     
   
 
   //statement to see if email field is empty. If it is, populate error variable. If not, put data into email variable
-
-     $totalprice = isset($_POST['totalprice']) ? $_POST['totalprice'] : "";
+ if (empty($_POST['totalprice'])) {
+      $totalpriceErr = "Total Price is required";
+    } else {
+      $totalprice = isset($_POST['totalprice']) ? $_POST['totalprice'] : "";
+  }
+     
   
 
 
@@ -94,13 +102,13 @@ echo $default;
 			</div>
 			<div class="form-row">
 				<label for="saledate">Date of Sale</label>
-				<input type="date" class="form-control" placeholder="YYYY-MM-DD" name="saledate" id="saledate" />
+				<input type="date" class="form-control" placeholder="YYYY-MM-DD" name="saledate" id="saledate" /><span class="error"><?php echo $saledateErr;?></span>
 			</div>
 			
 			<div class="form-row">
 				<label for="totalprice">Total Price</label>
 				<div class="input-group">
-					<input type="number" min="1" step="any" class="form-control" name="totalprice" id="totalprice" />
+					<input type="number" min="1" step="any" class="form-control" name="totalprice" id="totalprice" /><span class="error"><?php echo $totalpriceErr;?></span>
 				</div>
 			</div>
 			<br/>
