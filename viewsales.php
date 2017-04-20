@@ -57,7 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 		echo "<td>{$row[1]}</td>";
 		echo "<td>{$row[2]}</td>";
 		echo "<td>{$row[3]}</td>";
-		echo "<td><a href='edit.php?id=<?php echo $rows['InvoiceNumber']; ?>'>Edit</a></td></tr>";
+		echo "<td><a href= 'edit.php?InvoiceNumber=$row[0]'>Edit</a></td></tr>";
 		
 		$row = mysqli_fetch_row($queryResult);
 	}
@@ -89,9 +89,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 			<li class="dropdown active">
 				<a href="#" class="dropdown-toggle" data-toggle="dropdown">SALES <span class="caret"></span></a>
 				<ul class="dropdown-menu" role="menu">
-					<li><a href="add-sales.html">ADD SALES</a></li>
-					<li><a href="edit-sales.html">EDIT SALES</a></li>
-					<li><a href="display-sales.html">DISPLAY SALES</a></li>
+					<li><a href="addsales.php">ADD SALES</a></li>
+					<li><a href="edit.php">EDIT SALES</a></li>
+					<li><a href="viewsales.php">DISPLAY SALES</a></li>
 				</ul>
 			</li>
 			<li><a href="#">GOODS RECEIVED</a></li>
