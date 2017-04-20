@@ -11,6 +11,11 @@
 <body>
 
 <?php 
+session_start();
+$default = "";
+$default = $_SESSION['$login_user'];
+
+echo $default;
 
   // define variables and set to empty values
   $totalpriceErr = "";
@@ -85,7 +90,7 @@
 			<div class="form-row"><H1>Add Sales Record</H1></div>
 	<div class="form-row">
 				<label for="staffno">Staff Number</label>
-				<input type="number" class="form-control" name="staffno" id="staffno" />
+				<input type="number" class="form-control" name="staffno" id="staffno" value="<?php echo $default; ?>"/>
 			</div>
 			<div class="form-row">
 				<label for="saledate">Date of Sale</label>

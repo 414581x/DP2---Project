@@ -12,7 +12,7 @@
 <?php 
 //if SESSION is set as $login_user variable and pass it to request.php
 if(isset($_SESSION['$login_user'])){
-header("location: addstock.php");
+header("location: addsales.php");
 }
 
 
@@ -119,7 +119,7 @@ if (!empty($LoginNumber) && !empty($LoginPassword))
   $rows = mysql_num_rows($query);
   if ($rows == 1) {
   $_SESSION['$login_user']=$LoginNumber; // Initializing Session
-  header("location: addstock.php"); // Redirecting to records.php
+  header("location: addsales.php"); // Redirecting to records.php
   
   }
   else {
@@ -133,4 +133,3 @@ if (!empty($LoginNumber) && !empty($LoginPassword))
 ?>
 </body>
 </HTML>
-
