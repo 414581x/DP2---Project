@@ -57,7 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 		echo "<td>{$row[1]}</td>";
 		echo "<td>{$row[2]}</td>";
 		echo "<td>{$row[3]}</td>";
-		echo "<td><a href= 'edit.php?InvoiceNumber=$row[0]'>Edit</a></td></tr>";
+		echo "<td><a href= 'edit.php?InvoiceNumber=$row[0]'>Edit </a><a href= 'delete.php?InvoiceNumber=$row[0]'>Delete</a></td></tr>";
 		
 		$row = mysqli_fetch_row($queryResult);
 	}
