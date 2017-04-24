@@ -1,106 +1,24 @@
 create table Items (
-	Item_ID INT NOT NULL PRIMARY KEY,
-	Item_Type VARCHAR(16) NOT NULL,
-	Brand VARCHAR(50) NOT NULL,
-	Item_Name VARCHAR(50) NOT NULL
+	Item_ID INT not null,
+	Item_Type VARCHAR(11) not null,
+	Brand VARCHAR(50) not null,
+	Item_Name VARCHAR(50) not null,
+	Qty INT not null,
+	Price VARCHAR(50) not null,
+    primary key (Item_ID)
 );
-insert into Items (Item_ID, Item_Type, Brand, Item_Name) values (1, 'Other', 'good sense ibuprofen', 'Ibuprofen');
-insert into Items (Item_ID, Item_Type, Brand, Item_Name) values (2, 'Other', 'Petrolatum', 'White Petrolatum');
-insert into Items (Item_ID, Item_Type, Brand, Item_Name) values (3, 'Prescription', 'Carvedilol', 'Carvedilol');
-insert into Items (Item_ID, Item_Type, Brand, Item_Name) values (4, 'Other', 'Risperidone', 'Risperidone');
-insert into Items (Item_ID, Item_Type, Brand, Item_Name) values (5, 'Prescription', 'Nu Skin', 'Triclosan');
-insert into Items (Item_ID, Item_Type, Brand, Item_Name) values (6, 'Other', 'Aspirin', 'Aspirin');
-insert into Items (Item_ID, Item_Type, Brand, Item_Name) values (7, 'Over the counter', 'Myferon 150 Forte', 'IRON SUCROSE, FOLIC ACID, CYANOCOBALAMIN');
-insert into Items (Item_ID, Item_Type, Brand, Item_Name) values (8, 'Other', 'Hydrogen Peroxide', 'Hydrogen Peroxide');
-insert into Items (Item_ID, Item_Type, Brand, Item_Name) values (9, 'Other', 'Heavy Metal Detox', 'Allium sativum');
-insert into Items (Item_ID, Item_Type, Brand, Item_Name) values (10, 'Prescription', 'DOUBLE PERFECTION LUMIERE', 'TITANIUM DIOXIDE');
-insert into Items (Item_ID, Item_Type, Brand, Item_Name) values (11, 'Over the counter', 'CENTER-AL - PLATANUS RACEMOSA POLLEN', 'Allergenic Extracts Alum Precipitated');
-insert into Items (Item_ID, Item_Type, Brand, Item_Name) values (12, 'Prescription', 'Meijer Sunscreen SPF 15', 'OCTINOXATE, OXYBENZONE');
-insert into Items (Item_ID, Item_Type, Brand, Item_Name) values (13, 'Over the counter', 'TOPIRAMATE', 'topiramate');
-insert into Items (Item_ID, Item_Type, Brand, Item_Name) values (14, 'Other', 'Handy Solutions LISTERINE ANTISEPTIC MOUTHWASH', 'Eucalyptol, Menthol, Methyl Salicylate, and Thymol');
-insert into Items (Item_ID, Item_Type, Brand, Item_Name) values (15, 'Over the counter', 'Vancomycin Hydrochloride', 'VANCOMYCIN HYDROCHLORIDE');
-insert into Items (Item_ID, Item_Type, Brand, Item_Name) values (16, 'Other', 'ANTIMONIUM TARTARICUM', 'ANTIMONIUM TARTARICUM');
-insert into Items (Item_ID, Item_Type, Brand, Item_Name) values (17, 'Over the counter', 'Terrell', 'Isoflurane');
-insert into Items (Item_ID, Item_Type, Brand, Item_Name) values (18, 'Prescription', 'bareMinerals Ready SPF 15', 'Titanium Dioxide');
-insert into Items (Item_ID, Item_Type, Brand, Item_Name) values (19, 'Other', 'good sense nicotine', 'Nicotine Polacrilex');
-insert into Items (Item_ID, Item_Type, Brand, Item_Name) values (20, 'Prescription', 'Sugar Maple', 'Sugar Maple');
-insert into Items (Item_ID, Item_Type, Brand, Item_Name) values (21, 'Other', 'Bisoprolol Fumarate and Hydrochlorothiazide', 'Bisoprolol Fumarate and Hydrochlorothiazide');
-insert into Items (Item_ID, Item_Type, Brand, Item_Name) values (22, 'Prescription', 'Herbalife Skin Protective Moisturizer SPF 30', 'Avobenzone, Homosalate');
-insert into Items (Item_ID, Item_Type, Brand, Item_Name) values (23, 'Other', 'MegaFresh Antibacterial Deodorant', 'Triclocarban');
-insert into Items (Item_ID, Item_Type, Brand, Item_Name) values (24, 'Other', 'Furosemide', 'Furosemide');
-insert into Items (Item_ID, Item_Type, Brand, Item_Name) values (25, 'Other', 'CITALOPRAM', 'CITALOPRAM');
-insert into Items (Item_ID, Item_Type, Brand, Item_Name) values (26, 'Over the counter', 'ACER SACCHARUM POLLEN', 'Maple Sugar');
-insert into Items (Item_ID, Item_Type, Brand, Item_Name) values (27, 'Other', 'Lisinopril', 'Lisinopril');
-insert into Items (Item_ID, Item_Type, Brand, Item_Name) values (28, 'Over the counter', 'Acacia', 'Acacia');
-insert into Items (Item_ID, Item_Type, Brand, Item_Name) values (29, 'Other', 'Ibuprofen', 'Ibuprofen');
-insert into Items (Item_ID, Item_Type, Brand, Item_Name) values (30, 'Other', 'ZESTORETIC', 'Lisinopril and Hydrochlorothiazide');
-insert into Items (Item_ID, Item_Type, Brand, Item_Name) values (31, 'Over the counter', 'Protective and Moisturizing Skin', 'Clotrimazole');
-insert into Items (Item_ID, Item_Type, Brand, Item_Name) values (32, 'Other', 'Dove', 'Aluminum Chlorohydrate');
-insert into Items (Item_ID, Item_Type, Brand, Item_Name) values (33, 'Other', 'Cefoxitin and Dextrose', 'CEFOXITIN SODIUM');
-insert into Items (Item_ID, Item_Type, Brand, Item_Name) values (34, 'Other', 'CareOne All Day Allergy', 'Cetirizine Hydrochloride');
-insert into Items (Item_ID, Item_Type, Brand, Item_Name) values (35, 'Over the counter', 'NEXIUM', 'Esomeprazole magnesium');
-insert into Items (Item_ID, Item_Type, Brand, Item_Name) values (36, 'Over the counter', 'Caffeine Citrate', 'CAFFEINE CITRATE');
-insert into Items (Item_ID, Item_Type, Brand, Item_Name) values (37, 'Prescription', 'Sun Shades Lip Balm', 'Avobenzone 2.5%, Octinoxate 6%, Oxybenzone 3%');
-insert into Items (Item_ID, Item_Type, Brand, Item_Name) values (38, 'Other', 'ERAXIS', 'ANIDULAFUNGIN');
-insert into Items (Item_ID, Item_Type, Brand, Item_Name) values (39, 'Other', 'Oxygen', 'Oxygen');
-insert into Items (Item_ID, Item_Type, Brand, Item_Name) values (40, 'Over the counter', 'SHISEIDO SHEER MATIFYING COMPACT (REFILL)', 'Octinoxate and Titanium dioxide');
-insert into Items (Item_ID, Item_Type, Brand, Item_Name) values (41, 'Over the counter', 'Menstrual Complete', 'Acetaminophen, Caffeine, Pyrilamine maleate');
-insert into Items (Item_ID, Item_Type, Brand, Item_Name) values (42, 'Prescription', 'Triamterene and Hydrochlorothiazide', 'Triamterene and Hydrochlorothiazide');
-insert into Items (Item_ID, Item_Type, Brand, Item_Name) values (43, 'Over the counter', 'oxycodone hydrochloride', 'oxycodone hydrochloride');
-insert into Items (Item_ID, Item_Type, Brand, Item_Name) values (44, 'Prescription', 'Rizatriptan', 'Rizatriptan');
-insert into Items (Item_ID, Item_Type, Brand, Item_Name) values (45, 'Other', 'Dr. Cocoa', 'Dextromethorphan Hydrobromide');
-insert into Items (Item_ID, Item_Type, Brand, Item_Name) values (46, 'Other', 'Ampicillin', 'Ampicillin Sodium');
-insert into Items (Item_ID, Item_Type, Brand, Item_Name) values (47, 'Other', 'SHISEIDO THE MAKEUP LIFTING FOUNDATION', 'OCTINOXATE and TITANIUM DIOXIDE');
-insert into Items (Item_ID, Item_Type, Brand, Item_Name) values (48, 'Other', 'Betamethasone Valerate', 'Betamethasone Valerate');
-insert into Items (Item_ID, Item_Type, Brand, Item_Name) values (49, 'Prescription', 'Lovenox', 'enoxaparin sodium');
-insert into Items (Item_ID, Item_Type, Brand, Item_Name) values (50, 'Prescription', 'OXYGEN', 'OXYGEN');
-insert into Items (Item_ID, Item_Type, Brand, Item_Name) values (51, 'Over the counter', 'PRAVASTATIN SODIUM', 'PRAVASTATIN SODIUM');
-insert into Items (Item_ID, Item_Type, Brand, Item_Name) values (52, 'Other', 'Triaminic', 'ACETAMINOPHEN');
-insert into Items (Item_ID, Item_Type, Brand, Item_Name) values (53, 'Prescription', 'LEADER DRY EYE RELIEF', 'DEXTRAN, HYPROMELLOSE 2910');
-insert into Items (Item_ID, Item_Type, Brand, Item_Name) values (54, 'Other', 'Jasmine 3D Moist Pact', 'Allantoin');
-insert into Items (Item_ID, Item_Type, Brand, Item_Name) values (55, 'Prescription', 'PR Benzoyl Peroxide Wash', 'Benzoyl Peroxide Wash');
-insert into Items (Item_ID, Item_Type, Brand, Item_Name) values (56, 'Prescription', 'Mineral Oil', 'MINERAL OIL');
-insert into Items (Item_ID, Item_Type, Brand, Item_Name) values (57, 'Other', 'Mustard', 'Mustard');
-insert into Items (Item_ID, Item_Type, Brand, Item_Name) values (58, 'Prescription', 'Colgate Total', 'CETYLPYRIDINIUM CHLORIDE');
-insert into Items (Item_ID, Item_Type, Brand, Item_Name) values (59, 'Over the counter', 'Fluoxetine', 'FLUOXETINE HYDROCHLORIDE');
-insert into Items (Item_ID, Item_Type, Brand, Item_Name) values (60, 'Over the counter', 'Verapamil Hydrochloride', 'Verapamil Hydrochloride');
-insert into Items (Item_ID, Item_Type, Brand, Item_Name) values (61, 'Over the counter', 'Mydfrin', 'phenylephrine hydrochloride');
-insert into Items (Item_ID, Item_Type, Brand, Item_Name) values (62, 'Prescription', 'clindamycin phosphate', 'clindamycin phosphate');
-insert into Items (Item_ID, Item_Type, Brand, Item_Name) values (63, 'Other', 'Clarithromycin', 'Clarithromycin');
-insert into Items (Item_ID, Item_Type, Brand, Item_Name) values (64, 'Other', 'FAGUS GRANDIFOLIA POLLEN', 'Beech');
-insert into Items (Item_ID, Item_Type, Brand, Item_Name) values (65, 'Over the counter', 'Poverty Weed', 'Poverty Weed');
-insert into Items (Item_ID, Item_Type, Brand, Item_Name) values (66, 'Over the counter', 'Oxymorphone Hydrochloride', 'Oxymorphone Hydrochloride');
-insert into Items (Item_ID, Item_Type, Brand, Item_Name) values (67, 'Over the counter', 'BOTRYTIS CINEREA', 'BOTRYTIS CINEREA');
-insert into Items (Item_ID, Item_Type, Brand, Item_Name) values (68, 'Over the counter', 'Equate Mucus ER', 'Guaifenesin');
-insert into Items (Item_ID, Item_Type, Brand, Item_Name) values (69, 'Over the counter', 'PrismaSol', 'Calcium Chloride, Magnesium Chloride');
-insert into Items (Item_ID, Item_Type, Brand, Item_Name) values (70, 'Prescription', 'LIDOCAINE HYDROCHLORIDE', 'LIDOCAINE HYDROCHLORIDE ANHYDROUS');
-insert into Items (Item_ID, Item_Type, Brand, Item_Name) values (71, 'Over the counter', 'Clindamycin Hydrochloride', 'Clindamycin Hydrochloride');
-insert into Items (Item_ID, Item_Type, Brand, Item_Name) values (72, 'Prescription', 'Glumetza', 'metformin hydrochloride');
-insert into Items (Item_ID, Item_Type, Brand, Item_Name) values (73, 'Over the counter', 'Betamethasone Dipropionate', 'Betamethasone Dipropionate');
-insert into Items (Item_ID, Item_Type, Brand, Item_Name) values (74, 'Over the counter', 'BANANA BOAT', 'AVOBENZONE, OCTOCRYLENE, OXYBENZONE');
-insert into Items (Item_ID, Item_Type, Brand, Item_Name) values (75, 'Other', 'Se-Tan DHA', 'Ferrous Fumarate and Polysaccharide Iron');
-insert into Items (Item_ID, Item_Type, Brand, Item_Name) values (76, 'Over the counter', 'Australian Gold', 'Avobenzone');
-insert into Items (Item_ID, Item_Type, Brand, Item_Name) values (77, 'Over the counter', 'Adderall', 'Dextroamphetamine Saccharate');
-insert into Items (Item_ID, Item_Type, Brand, Item_Name) values (78, 'Prescription', 'Erythromycin', 'Erythromycin');
-insert into Items (Item_ID, Item_Type, Brand, Item_Name) values (79, 'Over the counter', 'Enteric Coated Low Dose Aspirin', 'Aspirin');
-insert into Items (Item_ID, Item_Type, Brand, Item_Name) values (80, 'Over the counter', 'fexofenadine hydrochloride', 'fexofenadine hydrochloride');
-insert into Items (Item_ID, Item_Type, Brand, Item_Name) values (81, 'Other', 'Dandruff', 'Pyrithione Zinc');
-insert into Items (Item_ID, Item_Type, Brand, Item_Name) values (82, 'Prescription', 'CLENZIDERM THERAPEUTIC', 'BENZOYL PEROXIDE');
-insert into Items (Item_ID, Item_Type, Brand, Item_Name) values (83, 'Other', 'Axe', 'Shampoo plus Conditioner');
-insert into Items (Item_ID, Item_Type, Brand, Item_Name) values (84, 'Other', 'Forma-Ray', 'Formaldehyde');
-insert into Items (Item_ID, Item_Type, Brand, Item_Name) values (85, 'Over the counter', 'Potassium Chloride', 'Potassium Chloride');
-insert into Items (Item_ID, Item_Type, Brand, Item_Name) values (86, 'Over the counter', 'Chlorpheniramine Maleate', 'CHLORPHENIRAMINE MALEATE');
-insert into Items (Item_ID, Item_Type, Brand, Item_Name) values (87, 'Prescription', 'butalbital, acetaminophen and caffeine', 'butalbital, acetaminophen and caffeine');
-insert into Items (Item_ID, Item_Type, Brand, Item_Name) values (88, 'Over the counter', 'Family Dollar', 'Salicylic Acid');
-insert into Items (Item_ID, Item_Type, Brand, Item_Name) values (89, 'Prescription', 'Bisacodyl', 'Bisacodyl');
-insert into Items (Item_ID, Item_Type, Brand, Item_Name) values (90, 'Over the counter', 'LBEL MAXIMUM COMFORT ', 'Zinc oxide');
-insert into Items (Item_ID, Item_Type, Brand, Item_Name) values (91, 'Prescription', 'Pyrrole', 'Pyrrole,');
-insert into Items (Item_ID, Item_Type, Brand, Item_Name) values (92, 'Prescription', 'Suave', 'Aluminum Zirconium');
-insert into Items (Item_ID, Item_Type, Brand, Item_Name) values (93, 'Prescription', '10 Person ANSI', 'BENZALKONIUM CHLORIDE');
-insert into Items (Item_ID, Item_Type, Brand, Item_Name) values (94, 'Other', 'Levetiracetam', 'Levetiracetam');
-insert into Items (Item_ID, Item_Type, Brand, Item_Name) values (95, 'Prescription', 'Up and Up Medicated', 'WITCH HAZEL');
-insert into Items (Item_ID, Item_Type, Brand, Item_Name) values (96, 'Prescription', 'No7 Beautiful Skin ', 'Avobenzone, Octisalate ');
-insert into Items (Item_ID, Item_Type, Brand, Item_Name) values (97, 'Over the counter', 'VIRACEPT', 'nelfinavir mesylate');
-insert into Items (Item_ID, Item_Type, Brand, Item_Name) values (98, 'Prescription', 'NEUTRACETT', 'ALLANTOIN GLYCERIN');
-insert into Items (Item_ID, Item_Type, Brand, Item_Name) values (99, 'Over the counter', 'DISKETS', 'Methadone Hydrochloride');
-insert into Items (Item_ID, Item_Type, Brand, Item_Name) values (100, 'Prescription', 'Pollens - Weeds, Careless/Pigweed Mix', 'Careless/Pigweed Mix');
+insert into Items (Item_ID, Item_Type, Brand, Item_Name, Qty, Price) values (1, 'health care', 'Xylocaine', 'LIDOCAINE HYDROCHLORIDE', 1, '$12.89');
+insert into Items (Item_ID, Item_Type, Brand, Item_Name, Qty, Price) values (2, 'health care', 'Diltiazem ', 'Diltiazem Hydrochloride', 4, '$49.28');
+insert into Items (Item_ID, Item_Type, Brand, Item_Name, Qty, Price) values (3, 'medicine', 'TERRACOTTA JOLI ', 'OCTINOXATE, TITANIUM DIOXIDE', 2, '$27.85');
+insert into Items (Item_ID, Item_Type, Brand, Item_Name, Qty, Price) values (4, 'accessories', 'Risperidone', 'Risperidone', 10, '$44.72');
+insert into Items (Item_ID, Item_Type, Brand, Item_Name, Qty, Price) values (5, 'health care', 'VITALUMIERE AQUA', 'OCTINOXATE and TITANIUM DIOXIDE', 4, '$5.50');
+insert into Items (Item_ID, Item_Type, Brand, Item_Name, Qty, Price) values (6, 'accessories', 'Gabapentin', 'Gabapentin', 1, '$46.78');
+insert into Items (Item_ID, Item_Type, Brand, Item_Name, Qty, Price) values (7, 'medicine', 'Terazos', 'Terazosin hydrochloride', 5, '$1.98');
+insert into Items (Item_ID, Item_Type, Brand, Item_Name, Qty, Price) values (8, 'accessories', 'Keppra', 'levetiracetam', 10, '$43.43');
+insert into Items (Item_ID, Item_Type, Brand, Item_Name, Qty, Price) values (9, 'medicine', 'Prenatal Plus', '.beta.-carotene, sodium acetate', 4, '$17.81');
+insert into Items (Item_ID, Item_Type, Brand, Item_Name, Qty, Price) values (10, 'health care', 'LEVOBUNOLOL HYDROCHLORIDE', 'levobunolol hydrochloride', 10, '$26.82');
+insert into Items (Item_ID, Item_Type, Brand, Item_Name, Qty, Price) values (11, 'health care', 'ziprasidone hydrochloride', 'Ziprasidone HCl', 1, '$36.66');
+insert into Items (Item_ID, Item_Type, Brand, Item_Name, Qty, Price) values (12, 'health care', 'Dr Young 2p Blemish Base SPF35 PA', 'ALLANTOIN', 7, '$33.15');
+insert into Items (Item_ID, Item_Type, Brand, Item_Name, Qty, Price) values (13, 'accessories', 'Hydrocortisone', 'Hydrocortisone', 8, '$42.99');
+insert into Items (Item_ID, Item_Type, Brand, Item_Name, Qty, Price) values (14, 'accessories', 'equate anti nausea', 'Dextrose (glucose)', 9, '$2.21');
+insert into Items (Item_ID, Item_Type, Brand, Item_Name, Qty, Price) values (15, 'health care', 'Bisac-Evac', 'Bisacodyl', 8, '$23.53');

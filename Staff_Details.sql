@@ -1,32 +1,22 @@
-create table Staff_Details (
-	Staff_ID VARCHAR(50) NOT NULL PRIMARY KEY,
-	First_Name VARCHAR(50) NOT NULL,
-	Last_Name VARCHAR(50) NOT NULL,
-	Staff_Position VARCHAR(10) NOT NULL,
-	Gender CHAR(1)NOT NULL
+create table Staff (
+	Staff_ID VARCHAR(50) not null,
+	First_Name VARCHAR(50) not null,
+	Last_Name VARCHAR(50) not null,
+	Staff_Position VARCHAR(11) not null,
+	Staff_Password VARCHAR(50) not null
 );
-insert into Staff_Details (Staff_ID, First_Name, Last_Name, Staff_Position, Gender) values ('wanderson0', 'Walter', 'Anderson', 'Chemist', 'M');
-insert into Staff_Details (Staff_ID, First_Name, Last_Name, Staff_Position, Gender) values ('kspencer1', 'Kelly', 'Spencer', 'Chemist', 'F');
-insert into Staff_Details (Staff_ID, First_Name, Last_Name, Staff_Position, Gender) values ('cmyers2', 'Christine', 'Myers', 'Chemist', 'F');
-insert into Staff_Details (Staff_ID, First_Name, Last_Name, Staff_Position, Gender) values ('bramirez3', 'Billy', 'Ramirez', 'TeamMember', 'M');
-insert into Staff_Details (Staff_ID, First_Name, Last_Name, Staff_Position, Gender) values ('ldixon4', 'Linda', 'Dixon', 'TeamMember', 'F');
-insert into Staff_Details (Staff_ID, First_Name, Last_Name, Staff_Position, Gender) values ('jray5', 'Janet', 'Ray', 'TeamMember', 'F');
-insert into Staff_Details (Staff_ID, First_Name, Last_Name, Staff_Position, Gender) values ('ebishop6', 'Earl', 'Bishop', 'Chemist', 'M');
-insert into Staff_Details (Staff_ID, First_Name, Last_Name, Staff_Position, Gender) values ('ehenderson7', 'Ernest', 'Henderson', 'TeamMember', 'M');
-insert into Staff_Details (Staff_ID, First_Name, Last_Name, Staff_Position, Gender) values ('tspencer8', 'Timothy', 'Spencer', 'TeamMember', 'M');
-insert into Staff_Details (Staff_ID, First_Name, Last_Name, Staff_Position, Gender) values ('rcrawford9', 'Russell', 'Crawford', 'Chemist', 'M');
-insert into Staff_Details (Staff_ID, First_Name, Last_Name, Staff_Position, Gender) values ('bwatsona', 'Benjamin', 'Watson', 'Chemist', 'M');
-insert into Staff_Details (Staff_ID, First_Name, Last_Name, Staff_Position, Gender) values ('cpowellb', 'Christina', 'Powell', 'Chemist', 'F');
-insert into Staff_Details (Staff_ID, First_Name, Last_Name, Staff_Position, Gender) values ('hwatsonc', 'Howard', 'Watson', 'TeamMember', 'M');
-insert into Staff_Details (Staff_ID, First_Name, Last_Name, Staff_Position, Gender) values ('rbennettd', 'Ralph', 'Bennett', 'TeamMember', 'M');
-insert into Staff_Details (Staff_ID, First_Name, Last_Name, Staff_Position, Gender) values ('kgutierreze', 'Kenneth', 'Gutierrez', 'TeamMember', 'M');
-insert into Staff_Details (Staff_ID, First_Name, Last_Name, Staff_Position, Gender) values ('hburkef', 'Heather', 'Burke', 'Chemist', 'F');
-insert into Staff_Details (Staff_ID, First_Name, Last_Name, Staff_Position, Gender) values ('pcoleg', 'Phyllis', 'Cole', 'TeamMember', 'F');
-insert into Staff_Details (Staff_ID, First_Name, Last_Name, Staff_Position, Gender) values ('mkimh', 'Matthew', 'Kim', 'TeamMember', 'M');
-insert into Staff_Details (Staff_ID, First_Name, Last_Name, Staff_Position, Gender) values ('agarzai', 'Adam', 'Garza', 'Chemist', 'M');
-insert into Staff_Details (Staff_ID, First_Name, Last_Name, Staff_Position, Gender) values ('sbennettj', 'Sean', 'Bennett', 'TeamMember', 'M');
-insert into Staff_Details (Staff_ID, First_Name, Last_Name, Staff_Position, Gender) values ('tsandersk', 'Thomas', 'Sanders', 'Chemist', 'M');
-insert into Staff_Details (Staff_ID, First_Name, Last_Name, Staff_Position, Gender) values ('ccampbelll', 'Cynthia', 'Campbell', 'Chemist', 'F');
-insert into Staff_Details (Staff_ID, First_Name, Last_Name, Staff_Position, Gender) values ('apaynem', 'Angela', 'Payne', 'Chemist', 'F');
-insert into Staff_Details (Staff_ID, First_Name, Last_Name, Staff_Position, Gender) values ('hfordn', 'Harold', 'Ford', 'Chemist', 'M');
-insert into Staff_Details (Staff_ID, First_Name, Last_Name, Staff_Position, Gender) values ('alawsono', 'Andrea', 'Lawson', 'TeamMember', 'F');
+insert into Staff (Staff_ID, First_Name, Last_Name, Staff_Position, Staff_Password) values ('rthorrington0', 'Richardo', 'Ladloe', 'Chemist', '5n488IJ7oo');
+insert into Staff (Staff_ID, First_Name, Last_Name, Staff_Position, Staff_Password) values ('dmckennan1', 'Devy', 'Albrecht', 'Chemist', 'bnmTBlb4');
+insert into Staff (Staff_ID, First_Name, Last_Name, Staff_Position, Staff_Password) values ('rdumbare2', 'Raquela', 'Adolf', 'Team_Member', '12fWbU35PgU');
+insert into Staff (Staff_ID, First_Name, Last_Name, Staff_Position, Staff_Password) values ('zboughtwood3', 'Zelig', 'Betteson', 'Chemist', 'ynagXkA');
+insert into Staff (Staff_ID, First_Name, Last_Name, Staff_Position, Staff_Password) values ('fmcdool4', 'Felic', 'Hardway', 'Chemist', 'zlxjNK');
+insert into Staff (Staff_ID, First_Name, Last_Name, Staff_Position, Staff_Password) values ('kkroon5', 'Karlotta', 'Delgaty', 'Team_Member', 'tIYqCl9');
+insert into Staff (Staff_ID, First_Name, Last_Name, Staff_Position, Staff_Password) values ('cmcgarry6', 'Celinka', 'Trunks', 'Team_Member', 'XPGyY3i');
+insert into Staff (Staff_ID, First_Name, Last_Name, Staff_Position, Staff_Password) values ('apashler7', 'Ardeen', 'Jemison', 'Team_Member', '6GxLG5pLBrt');
+insert into Staff (Staff_ID, First_Name, Last_Name, Staff_Position, Staff_Password) values ('ewilsee8', 'Evangelia', 'Billiard', 'Team_Member', '2fTn6A');
+insert into Staff (Staff_ID, First_Name, Last_Name, Staff_Position, Staff_Password) values ('acullerne9', 'Adore', 'Gorwood', 'Team_Member', 'mcCc2a');
+insert into Staff (Staff_ID, First_Name, Last_Name, Staff_Position, Staff_Password) values ('hrykerta', 'Hayden', 'Rawes', 'Chemist', 'BtDjso');
+insert into Staff (Staff_ID, First_Name, Last_Name, Staff_Position, Staff_Password) values ('cmcgowanb', 'Carol', 'Bydaway', 'Chemist', 'v54rYy2');
+insert into Staff (Staff_ID, First_Name, Last_Name, Staff_Position, Staff_Password) values ('ndrancec', 'Nedda', 'Quinell', 'Team_Member', 'O2ZJQSoIrtHe');
+insert into Staff (Staff_ID, First_Name, Last_Name, Staff_Position, Staff_Password) values ('gleydend', 'Grantham', 'Wison', 'Team_Member', 'LlD6sXcy');
+insert into Staff (Staff_ID, First_Name, Last_Name, Staff_Position, Staff_Password) values ('jheartfielde', 'Jamesy', 'Flude', 'Team_Member', '71dVNFb');
