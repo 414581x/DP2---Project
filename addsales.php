@@ -15,7 +15,7 @@ session_start();
 $default = "";
 $default = $_SESSION['$login_user'];
 
-echo $default;
+
 
 	// define variables and set to empty values
 	$totalpriceErr = $saledateErr = "";
@@ -124,6 +124,7 @@ echo $default;
 <?php
  //if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
+<<<<<<< HEAD
 	$servername = "feenix-mariadb.swin.edu.au";
 	$username = "s414581x";
 	$password = "141083";
@@ -157,5 +158,40 @@ echo $default;
 	$conn->close();
 		}
 	// }
+=======
+     $servername = "localhost";
+  $username = "dp2";
+  $password = "phpdp2";
+  $dbname = "dp2php";
+
+  // Create connection
+  $conn = new mysqli($servername, $username, $password, $dbname);
+  // Check connection
+  if ($conn === false) {
+    die("Connection failed: " . $conn->connect_error);}
+
+  //SQl query to check if user already exists
+  
+
+
+  if(!empty($staffno) && !empty($saledate) && !empty($totalprice)) {
+  
+  
+      //SQL statement to insert new record of user
+      $sql = "INSERT INTO Sales (SalesDate, StaffNo, TotalPrice)
+      VALUES ('$saledate', $staffno, $totalprice)";
+  
+
+      if($conn->query($sql) === TRUE){
+       echo "Sales Record successfully added.";
+      }
+      else {
+        echo "ERROR: Could not execute insert." . $conn->error;
+      }
+ 
+  $conn->close();
+    }
+  // }
+>>>>>>> 718ebeeea28ab2dcc5c39a29f22396dbc7cb545d
 ?>
 </html>

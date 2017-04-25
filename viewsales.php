@@ -29,10 +29,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	//Concat 3 variables into 1 variable
 	$adate = $ayear. "-" .$amonth. "-" .$aday;
 
- $servername = "feenix-mariadb.swin.edu.au";
-  $username = "s414581x";
-  $password = "141083";
-  $dbname = "s414581x_db";
+$servername = "localhost";
+  $username = "dp2";
+  $password = "phpdp2";
+  $dbname = "dp2php";;
 
   // Create connection
   $conn = new mysqli($servername, $username, $password, $dbname);
@@ -148,11 +148,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	<option value="2018">2018</option>
 	</select>
 				</div>
+				<div class="form-row">
+				Select Date Item for Retrieve: <input type="radio" name="rdate" value="rdate">Request Date &nbsp; <input type="radio" name="pdate" value="pdate">Pick-up Date <br/>
+				</div
 			</div>
 			<br/>
 			<div class="form-row">
 				<button type="submit" class="btn btn-primary">Submit</button>
 			</div>
+
 		</form>
 </div><!-- /.form-container -->
 	<script src="js/jquery.min.js"></script>
