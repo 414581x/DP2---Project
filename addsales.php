@@ -2,7 +2,7 @@
 
 <html XMLns="http://www.w3.org/1999/xHTML">
 <head>
-	<title>Add Sales Recors</title>
+	<title>Add Sales Records</title>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 	<link href="css/bootstrap.min.css" rel="stylesheet" />
@@ -10,45 +10,45 @@
 </head>
 <body>
 
-<?php 
+<?php
 session_start();
 $default = "";
 $default = $_SESSION['$login_user'];
 
 echo $default;
 
-  // define variables and set to empty values
-  $totalpriceErr = $saledateErr = "";
-  $staffno = $saledate = $totalprice = "";
+	// define variables and set to empty values
+	$totalpriceErr = $saledateErr = "";
+	$staffno = $saledate = $totalprice = "";
 
-  if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    //statement to see if name field is empty. If it is, populate error variable. If not, put data into name variable
-  
-      //$inum = isset($_POST['inum']) ? $_POST['inum'] : "";
-  
+	if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+		//statement to see if name field is empty. If it is, populate error variable. If not, put data into name variable
 
-  //statement to see if password field is empty. If it is, populate error variable. If not, put data into password variable
+			//$inum = isset($_POST['inum']) ? $_POST['inum'] : "";
 
-     $staffno = isset($_POST['staffno']) ? $_POST['staffno'] : "";
-  
 
-  //statement to see if password confirmation field is empty. If it is, populate error variable. If not, put data into confirmation password variable
+	//statement to see if password field is empty. If it is, populate error variable. If not, put data into password variable
+
+		 $staffno = isset($_POST['staffno']) ? $_POST['staffno'] : "";
+
+
+	//statement to see if password confirmation field is empty. If it is, populate error variable. If not, put data into confirmation password variable
  if (empty($_POST['saledate'])) {
-      $saledateErr = "Sale Date is required";
-    } else {
-      $saledate = isset($_POST['saledate']) ? $_POST['saledate'] : "";
-  }
-     
-  
+			$saledateErr = "Sale Date is required";
+		} else {
+			$saledate = isset($_POST['saledate']) ? $_POST['saledate'] : "";
+	}
 
-  //statement to see if email field is empty. If it is, populate error variable. If not, put data into email variable
+
+
+	//statement to see if email field is empty. If it is, populate error variable. If not, put data into email variable
  if (empty($_POST['totalprice'])) {
-      $totalpriceErr = "Total Price is required";
-    } else {
-      $totalprice = isset($_POST['totalprice']) ? $_POST['totalprice'] : "";
-  }
-     
-  
+			$totalpriceErr = "Total Price is required";
+		} else {
+			$totalprice = isset($_POST['totalprice']) ? $_POST['totalprice'] : "";
+	}
+
+
 
 
 }
@@ -104,7 +104,7 @@ echo $default;
 				<label for="saledate">Date of Sale</label>
 				<input type="date" class="form-control" placeholder="YYYY-MM-DD" name="saledate" id="saledate" /><span class="error"><?php echo $saledateErr;?></span>
 			</div>
-			
+
 			<div class="form-row">
 				<label for="totalprice">Total Price</label>
 				<div class="input-group">
@@ -124,38 +124,38 @@ echo $default;
 <?php
  //if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-  $servername = "feenix-mariadb.swin.edu.au";
-  $username = "s414581x";
-  $password = "141083";
-  $dbname = "s414581x_db";
+	$servername = "feenix-mariadb.swin.edu.au";
+	$username = "s414581x";
+	$password = "141083";
+	$dbname = "s414581x_db";
 
-  // Create connection
-  $conn = new mysqli($servername, $username, $password, $dbname);
-  // Check connection
-  if ($conn === false) {
-    die("Connection failed: " . $conn->connect_error);}
+	// Create connection
+	$conn = new mysqli($servername, $username, $password, $dbname);
+	// Check connection
+	if ($conn === false) {
+		die("Connection failed: " . $conn->connect_error);}
 
-  //SQl query to check if user already exists
-  
+	//SQl query to check if user already exists
 
 
-  if(!empty($staffno) && !empty($saledate) && !empty($totalprice)) {
-  
-  
-      //SQL statement to insert new record of user
-      $sql = "INSERT INTO Sales (SalesDate, StaffNo, TotalPrice)
-      VALUES ('$saledate', $staffno, $totalprice)";
-  
 
-      if($conn->query($sql) === TRUE){
-       echo "Sales Record successfully added.";
-      }
-      else {
-        echo "ERROR: Could not execute insert." . $conn->error;
-      }
- 
-  $conn->close();
-    }
-  // }
+	if(!empty($staffno) && !empty($saledate) && !empty($totalprice)) {
+
+
+			//SQL statement to insert new record of user
+			$sql = "INSERT INTO Sales (SalesDate, StaffNo, TotalPrice)
+			VALUES ('$saledate', $staffno, $totalprice)";
+
+
+			if($conn->query($sql) === TRUE){
+			 echo "Sales Record successfully added.";
+			}
+			else {
+				echo "ERROR: Could not execute insert." . $conn->error;
+			}
+
+	$conn->close();
+		}
+	// }
 ?>
 </html>
