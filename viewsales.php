@@ -154,24 +154,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 				<button type="submit" class="btn btn-primary">Submit</button>
 			</div>
 		</form>
-	<button>Export as CSV</button>
+	<form method="get" action="csv.php">
+		<p>Export as CSV: <input type="text" name="csv"><input id="submit" type="submit" value="Export"/></p>
+	</form>
 </div><!-- /.form-container -->
 	<script src="js/jquery.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/angular.min.js"></script>
 </body>
-<?php
-$result = mysqli_query($con, 'SELECT * FROM table');
-$row = mysqli_fetch_array($result, MYSQLI_ASSOC);
 
-$fp = fopen('file.csv', 'w');
-
-foreach ($row as $val) {
-	fputcsv($fp, $val);
-}
-
-fclose($fp);
-
-
-?>
 </html>
