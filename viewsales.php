@@ -10,7 +10,7 @@
 </head>
 <body>
 
-<?php 
+<?php
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	// define variables and set to empty values
 	$adate = $amonth = $aday = $ayear = "";
@@ -37,11 +37,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   // Create connection
   $conn = new mysqli($servername, $username, $password, $dbname);
   // Check connection
- 	if ($conn === false) {
-    die("Connection failed: " . $conn->connect_error);}
+	 if ($conn === false) {
+	die("Connection failed: " . $conn->connect_error);}
 
 
-		
+
 		$SQLstring = "SELECT InvoiceNumber, SalesDate, StaffNo , TotalPrice FROM Sales where SalesDate = '$adate'";
 
 		$queryResult = @mysqli_query($conn, $SQLstring)
@@ -51,20 +51,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	echo "<table width='100%' border='1'>";
 	echo "<th>Invoice Number</th><th>Sales Date</th><th>Staff Number</th><th>Total Price</th><th>Options</th>";
 	$row = mysqli_fetch_row($queryResult);
-	
+
 	while ($row) {
 		echo "<tr><td>{$row[0]}</td>";
 		echo "<td>{$row[1]}</td>";
 		echo "<td>{$row[2]}</td>";
 		echo "<td>{$row[3]}</td>";
 		echo "<td><a href= 'edit.php?InvoiceNumber=$row[0]'>Edit </a><a href= 'delete.php?InvoiceNumber=$row[0]'>Delete</a></td></tr>";
-		
+
 		$row = mysqli_fetch_row($queryResult);
 	}
-    
-    
 
-	
+
+
+
 
 	mysqli_close($conn);
 
@@ -118,8 +118,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 				<label for="staffno">Day</label>
 				<select name="aday" value=''><option>Day</option>
 	<?php for ($i = 1; $i <= 31; $i++) : ?>
-  	<option value="<?php echo $i; ?>"><?php echo $i; ?></option>
-  	<?php endfor; ?></select> 
+	  <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
+	  <?php endfor; ?></select>
 
 			</div>
 			<div class="form-row">
@@ -139,7 +139,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	<option value='12'>December</option>
 	</select>
 			</div>
-			
+
 			<div class="form-row">
 				<label for="totalprice">Year</label>
 				<div class="input-group">
@@ -154,14 +154,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 				<button type="submit" class="btn btn-primary">Submit</button>
 			</div>
 		</form>
+	<button>Export as CSV</button>
 </div><!-- /.form-container -->
 	<script src="js/jquery.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/angular.min.js"></script>
 </body>
-<?php 
+<?php
+$result = mysqli_query($con, 'SELECT * FROM table');
+$row = mysqli_fetch_array($result, MYSQLI_ASSOC);
 
- 
+$fp = fopen('file.csv', 'w');
+
+foreach ($row as $val) {
+	fputcsv($fp, $val);
+}
+
+fclose($fp);
+
 
 ?>
 </html>
