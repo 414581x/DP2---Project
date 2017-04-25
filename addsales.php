@@ -15,7 +15,7 @@ session_start();
 $default = "";
 $default = $_SESSION['$login_user'];
 
-echo $default;
+
 
   // define variables and set to empty values
   $totalpriceErr = $saledateErr = "";
@@ -124,10 +124,10 @@ echo $default;
 <?php
  //if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-  $servername = "feenix-mariadb.swin.edu.au";
-  $username = "s414581x";
-  $password = "141083";
-  $dbname = "s414581x_db";
+     $servername = "localhost";
+  $username = "dp2";
+  $password = "phpdp2";
+  $dbname = "dp2php";
 
   // Create connection
   $conn = new mysqli($servername, $username, $password, $dbname);

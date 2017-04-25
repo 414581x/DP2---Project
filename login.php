@@ -105,28 +105,36 @@ session_start();
 if (!empty($LoginNumber) && !empty($LoginPassword))
 {
 
-  $servername = "feenix-mariadb.swin.edu.au";
-  $username = "s414581x";
-  $password = "141083";
-  $dbname = "s414581x_db";
+   $servername = "localhost";
+  $username = "dp2";
+  $password = "phpdp2";
+  $dbname = "dp2php";
 
-  // Create connection
-  $conn = mysql_connect($servername, $username, $password);
-  $db = mysql_select_db($dbname, $conn);
+ // Create connection
+  $conn = new mysqli($servername, $username, $password, $dbname);
+  // Check connection
+  if ($conn === false) {
+    die("Connection failed: " . $conn->connect_error);}
+
+  //SQl query to check if user already exists
+  echo $LoginNumber;
+echo $LoginPassword;
 
   //SQL query to select the correct table row where the customer number and password match 
-  $query = mysql_query("SELECT * FROM staff where StaffNo='$LoginNumber' and Password='$LoginPassword'", $conn) ;
-  $rows = mysql_num_rows($query);
-  if ($rows == 1) {
+  $sql = "SELECT * FROM Staff WHERE StaffID = $LoginNumber AND $LoginPassword = '$LoginPassword'" ;
+
+
+
+//if($conn->query($sql) === TRUE){
   $_SESSION['$login_user']=$LoginNumber; // Initializing Session
-  header("location: addsales.php"); // Redirecting to records.php
+  header("location: addsales.php"); // Redirecting to addsales.php
   
-  }
-  else {
+  //}
+  //else {
     //If no user is found, show error message
-    echo "Staff Number or Password is invalid";
-  }
-  mysql_close($conn); // Closing Connection
+    //echo "Staff Number or Password is invalid";
+  //}
+  $conn->close(); // Closing Connection
 
 }
 

@@ -10,7 +10,7 @@
 </head>
 <body>
 
-<?php
+<?php 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	// define variables and set to empty values
 	$adate = $amonth = $aday = $ayear = "";
@@ -29,19 +29,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	//Concat 3 variables into 1 variable
 	$adate = $ayear. "-" .$amonth. "-" .$aday;
 
- $servername = "feenix-mariadb.swin.edu.au";
-  $username = "s414581x";
-  $password = "141083";
-  $dbname = "s414581x_db";
+$servername = "localhost";
+  $username = "dp2";
+  $password = "phpdp2";
+  $dbname = "dp2php";;
 
   // Create connection
   $conn = new mysqli($servername, $username, $password, $dbname);
   // Check connection
-	 if ($conn === false) {
-	die("Connection failed: " . $conn->connect_error);}
+ 	if ($conn === false) {
+    die("Connection failed: " . $conn->connect_error);}
 
 
-
+		
 		$SQLstring = "SELECT InvoiceNumber, SalesDate, StaffNo , TotalPrice FROM Sales where SalesDate = '$adate'";
 
 		$queryResult = @mysqli_query($conn, $SQLstring)
@@ -51,20 +51,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	echo "<table width='100%' border='1'>";
 	echo "<th>Invoice Number</th><th>Sales Date</th><th>Staff Number</th><th>Total Price</th><th>Options</th>";
 	$row = mysqli_fetch_row($queryResult);
-
+	
 	while ($row) {
 		echo "<tr><td>{$row[0]}</td>";
 		echo "<td>{$row[1]}</td>";
 		echo "<td>{$row[2]}</td>";
 		echo "<td>{$row[3]}</td>";
 		echo "<td><a href= 'edit.php?InvoiceNumber=$row[0]'>Edit </a><a href= 'delete.php?InvoiceNumber=$row[0]'>Delete</a></td></tr>";
-
+		
 		$row = mysqli_fetch_row($queryResult);
 	}
+    
+    
 
-
-
-
+	
 
 	mysqli_close($conn);
 
@@ -118,8 +118,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 				<label for="staffno">Day</label>
 				<select name="aday" value=''><option>Day</option>
 	<?php for ($i = 1; $i <= 31; $i++) : ?>
-	  <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
-	  <?php endfor; ?></select>
+  	<option value="<?php echo $i; ?>"><?php echo $i; ?></option>
+  	<?php endfor; ?></select> 
 
 			</div>
 			<div class="form-row">
@@ -139,7 +139,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	<option value='12'>December</option>
 	</select>
 			</div>
-
+			
 			<div class="form-row">
 				<label for="totalprice">Year</label>
 				<div class="input-group">
@@ -148,19 +148,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	<option value="2018">2018</option>
 	</select>
 				</div>
+				<div class="form-row">
+				Select Date Item for Retrieve: <input type="radio" name="rdate" value="rdate">Request Date &nbsp; <input type="radio" name="pdate" value="pdate">Pick-up Date <br/>
+				</div
 			</div>
 			<br/>
 			<div class="form-row">
 				<button type="submit" class="btn btn-primary">Submit</button>
 			</div>
+
 		</form>
-	<form method="get" action="csv.php">
-		<p>Export as CSV: <input type="text" name="csv"><input id="submit" type="submit" value="Export"/></p>
-	</form>
 </div><!-- /.form-container -->
 	<script src="js/jquery.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/angular.min.js"></script>
 </body>
+<?php 
 
+ 
+
+?>
 </html>
