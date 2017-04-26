@@ -1,4 +1,4 @@
-/* Nav */
+/* -- NAV */
 #header .navbar {
 		background: #2e3949;
 		border-radius: 0px;
@@ -73,11 +73,12 @@
 		color: white;
 		font-size: 1.5em;
 }
+/* NAV -- */
 
-/* form */
+/* -- FORM */
 form {
 		margin: 20px auto;
-		width: 420px;
+		width: 600px;
 }
 .form-row {
 		padding: 5px 10px;
@@ -101,3 +102,10 @@ input.currency {
 		position: relative;
 		z-index: 3;
 }
+
+.btn {
+		display: table;
+		margin: auto;
+		width: 100%;
+}
+/* FORM -- */
