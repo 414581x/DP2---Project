@@ -17,11 +17,12 @@ header("location: addsales.php");
 // define variables and set to empty values
 $staffnoErr = $passwordErr = "";
 $LoginNumber = $LoginPassword = "";
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-		if (empty($_POST['staffno'])) {
-			$staffnoErr = "Staff Number is required";
-		} else {
-			$LoginNumber=isset($_POST['staffno']) ? $_POST['staffno'] : "";
+if ($_SERVER['REQUEST_METHOD'] === 'POST')
+{
+	if (empty($_POST['staffno'])) {
+		$staffnoErr = "Staff Number is required";
+	} else {
+		$LoginNumber=isset($_POST['staffno']) ? $_POST['staffno'] : "";
 	}
 	//statement to see if password field is empty. If it is, populate error variable. If not, put data into password variable
 	if (empty($_POST['lpassword'])) {
@@ -29,8 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	} else {
 		 $LoginPassword = isset($_POST['lpassword']) ? $_POST['lpassword'] : "";
 	}
-
-	}
+}
 ?>
 
 <div class="jumbotron text-center">
@@ -49,18 +49,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 				</div>
 				<div class="form-row">
 					<label for="lpassword">Password</label>
-					<input type="text" class="form-control" name="lpassword" id="lpassword" /><span class="error"><?php echo $passwordErr;?></span>
+					<input type="password" class="form-control" name="lpassword" id="lpassword" /><span class="error"><?php echo $passwordErr;?></span>
 				</div>
 			<br/>
 				<div class="form-row">
 					<button type="submit" class="btn btn-primary" value="Login">Log In</button>
 				</div>
+				<div class="form-row">
+					<p class="text-center">Don't have an account?</p>
+					<a href="#" class="btn btn-primary">Create New User</a>
+				</div>
 			</form>
-		</div>
-
-		<div class="col-xs-12 center-block">
-			<p class="text-center">Don't have an account?</p>
-			<a href="#" class="btn btn-primary">Create New User</a>
 		</div>
 	</div>
 </div>
@@ -71,18 +70,11 @@ session_start();
 //if fields are not empty, execute
 if (!empty($LoginNumber) && !empty($LoginPassword))
 {
-	 $servername = "localhost";
-	$username = "dp2";
-	$password = "phpdp2";
-	$dbname = "dp2php";
- // Create connection
-	$conn = new mysqli($servername, $username, $password, $dbname);
-	// Check connection
-	if ($conn === false) {
-		die("Connection failed: " . $conn->connect_error);}
-	//SQl query to check if user already exists
-	echo $LoginNumber;
-echo $LoginPassword;
+	//include the php file with the connection details
+	include 'connection.php';
+	//call the function to connect to the database
+  	connection();
+
 	//SQL query to select the correct table row where the customer number and password match
 	$sql = "SELECT * FROM Staff WHERE StaffID = $LoginNumber AND $LoginPassword = '$LoginPassword'" ;
 //if($conn->query($sql) === TRUE){

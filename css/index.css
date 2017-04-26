@@ -1,10 +1,7 @@
 .col-xs-12 {
-		padding: 15px;
-}
-.center-block {
 		display: table;
 		margin: auto;
-		width: 420px;
+		padding: 15px;
 }
 
 .btn{
@@ -13,7 +10,7 @@
 		width: 100%;
 }
 
-/* form */
+/* -- FORM */
 form {
 		margin: 20px auto;
 		width: 420px;
@@ -37,4 +34,4 @@ label {
 		position: relative;
 		z-index: 3;
 }
-/* --form */
+/* FORM -- */
