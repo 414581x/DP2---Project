@@ -57,7 +57,6 @@
 }
 ?>
 
-
 <nav class="navbar navbar-default" role="navigation">
 <div class="container-fluid">
 		<div class="navbar-header">
@@ -67,7 +66,7 @@
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="cover.html">PHP Inc.</a>
+			<a class="navbar-brand" href="index.php">PHP Inc.</a>
 		</div>
 	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 		<ul class="nav navbar-nav">
@@ -79,7 +78,13 @@
 					<li><a href="viewsales.php">DISPLAY SALES</a></li>
 				</ul>
 			</li>
-			<li class="active"><a href="addstock.php">STOCK</a></li>
+			<li class="dropdown active">
+				<a href="#" class="dropdown-toggle" data-toggle="dropdown">STOCK <span class="caret"></span></a>
+				<ul class="dropdown-menu" role="menu">
+					<li><a href="addstock.php">ADD STOCK ITEM</a></li>
+					<li><a href="#">STOCK COUNT</a></li>
+				</ul>
+			</li>
 			<li><a href="#">REPORTING</a></li>
 			<li><a href="#">PREDICTION</a></li>
 		</ul>

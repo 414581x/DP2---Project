@@ -64,7 +64,13 @@ $InvoiceNumber = $_GET['InvoiceNumber'];
 					<li><a href="viewsales.php">DISPLAY SALES</a></li>
 				</ul>
 			</li>
-			<li><a href="addstock.php">STOCK</a></li>
+			<li class="dropdown">
+				<a href="#" class="dropdown-toggle" data-toggle="dropdown">STOCK <span class="caret"></span></a>
+				<ul class="dropdown-menu" role="menu">
+					<li><a href="addstock.php">ADD STOCK ITEM</a></li>
+					<li><a href="#">STOCK COUNT</a></li>
+				</ul>
+			</li>
 			<li><a href="#">REPORTING</a></li>
 			<li><a href="#">PREDICTION</a></li>
 		</ul>
