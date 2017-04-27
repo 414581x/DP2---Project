@@ -2,7 +2,7 @@
 
 <html XMLns="http://www.w3.org/1999/xHTML">
 <head>
-	<title>Add Sales Recors</title>
+	<title>Edit Sales Records</title>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 	<link href="css/bootstrap.min.css" rel="stylesheet" />
@@ -10,7 +10,7 @@
 </head>
 <body>
 
-<?php 
+<?php
 $InvoiceNumber = $_GET['InvoiceNumber'];
   // define variables and set to empty values
   $totalpriceErr = "";
@@ -19,24 +19,24 @@ $InvoiceNumber = $_GET['InvoiceNumber'];
 
   if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     //statement to see if name field is empty. If it is, populate error variable. If not, put data into name variable
-  
+
       //$inum = isset($_POST['inum']) ? $_POST['inum'] : "";
-  
-  		
+
+
   //statement to see if password field is empty. If it is, populate error variable. If not, put data into password variable
 
      $staffno = isset($_POST['staffno']) ? $_POST['staffno'] : "";
-  
+
 
   //statement to see if password confirmation field is empty. If it is, populate error variable. If not, put data into confirmation password variable
- 
+
      $saledate = isset($_POST['saledate']) ? $_POST['saledate'] : "";
-  
+
 
   //statement to see if email field is empty. If it is, populate error variable. If not, put data into email variable
 
      $totalprice = isset($_POST['totalprice']) ? $_POST['totalprice'] : "";
-  
+
 
 
 }
@@ -64,9 +64,9 @@ $InvoiceNumber = $_GET['InvoiceNumber'];
 					<li><a href="viewsales.php">DISPLAY SALES</a></li>
 				</ul>
 			</li>
-			<li><a href="#">GOODS RECEIVED</a></li>
+			<li><a href="addstock.php">STOCK</a></li>
 			<li><a href="#">REPORTING</a></li>
-			<li><a href="#">SALES</a></li>
+			<li><a href="#">PREDICTION</a></li>
 		</ul>
 		<ul class="nav navbar-nav navbar-right">
 			<li class="dropdown">
@@ -92,7 +92,7 @@ $InvoiceNumber = $_GET['InvoiceNumber'];
 				<label for="saledate">Date of Sale</label>
 				<input type="date" class="form-control" placeholder="YYYY-MM-DD" name="saledate" id="saledate" />
 			</div>
-			
+
 			<div class="form-row">
 				<label for="totalprice">Total Price</label>
 				<div class="input-group">
@@ -110,30 +110,20 @@ $InvoiceNumber = $_GET['InvoiceNumber'];
 	<script src="js/angular.min.js"></script>
 </body>
 <?php
- //if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-$servername = "localhost";
-  $username = "dp2";
-  $password = "phpdp2";
-  $dbname = "dp2php";
 
-  // Create connection
-  $conn = new mysqli($servername, $username, $password, $dbname);
-  // Check connection
-  if ($conn === false) {
-    die("Connection failed: " . $conn->connect_error);}
+include 'connection.php';
 
-  //SQl query to check if user already exists
-  
+  connection();
 
 
   if(!empty($staffno) && !empty($saledate) && !empty($totalprice)) {
-  
-  
+
+
       //SQL statement to insert new record of user
       $sql = "UPDATE Sales SET SalesDate = '$saledate', StaffNo = '$staffno', TotalPrice='$totalprice' WHERE InvoiceNumber = $InvoiceNumber";
-      
-  
+
+
 
       if($conn->query($sql) === TRUE){
        echo "Sales Record successfully updated.";
@@ -141,7 +131,7 @@ $servername = "localhost";
       else {
         echo "ERROR: Could not execute update." . $conn->error;
       }
- 
+
   $conn->close();
     }
   // }

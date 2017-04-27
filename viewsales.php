@@ -2,7 +2,7 @@
 
 <html XMLns="http://www.w3.org/1999/xHTML">
 <head>
-	<title>Add Sales Recors</title>
+	<title>View Sales Records</title>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 	<link href="css/bootstrap.min.css" rel="stylesheet" />
@@ -10,7 +10,7 @@
 </head>
 <body>
 
-<?php 
+<?php
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	// define variables and set to empty values
 	$adate = $amonth = $aday = $ayear = "";
@@ -29,19 +29,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	//Concat 3 variables into 1 variable
 	$adate = $ayear. "-" .$amonth. "-" .$aday;
 
-$servername = "localhost";
-  $username = "dp2";
-  $password = "phpdp2";
-  $dbname = "dp2php";;
+include 'connection.php';
 
-  // Create connection
-  $conn = new mysqli($servername, $username, $password, $dbname);
-  // Check connection
- 	if ($conn === false) {
-    die("Connection failed: " . $conn->connect_error);}
+  connection();
 
 
-		
+
 		$SQLstring = "SELECT InvoiceNumber, SalesDate, StaffNo , TotalPrice FROM Sales where SalesDate = '$adate'";
 
 		$queryResult = @mysqli_query($conn, $SQLstring)
@@ -51,20 +44,20 @@ $servername = "localhost";
 	echo "<table width='100%' border='1'>";
 	echo "<th>Invoice Number</th><th>Sales Date</th><th>Staff Number</th><th>Total Price</th><th>Options</th>";
 	$row = mysqli_fetch_row($queryResult);
-	
+
 	while ($row) {
 		echo "<tr><td>{$row[0]}</td>";
 		echo "<td>{$row[1]}</td>";
 		echo "<td>{$row[2]}</td>";
 		echo "<td>{$row[3]}</td>";
 		echo "<td><a href= 'edit.php?InvoiceNumber=$row[0]'>Edit </a><a href= 'delete.php?InvoiceNumber=$row[0]'>Delete</a></td></tr>";
-		
+
 		$row = mysqli_fetch_row($queryResult);
 	}
-    
-    
 
-	
+
+
+
 
 	mysqli_close($conn);
 
@@ -94,9 +87,9 @@ $servername = "localhost";
 					<li><a href="viewsales.php">DISPLAY SALES</a></li>
 				</ul>
 			</li>
-			<li><a href="#">GOODS RECEIVED</a></li>
+			<li><a href="addstock.php">STOCK</a></li>
 			<li><a href="#">REPORTING</a></li>
-			<li><a href="#">SALES</a></li>
+			<li><a href="#">PREDICTION</a></li>
 		</ul>
 		<ul class="nav navbar-nav navbar-right">
 			<li class="dropdown">
@@ -119,7 +112,7 @@ $servername = "localhost";
 				<select name="aday" value=''><option>Day</option>
 	<?php for ($i = 1; $i <= 31; $i++) : ?>
   	<option value="<?php echo $i; ?>"><?php echo $i; ?></option>
-  	<?php endfor; ?></select> 
+  	<?php endfor; ?></select>
 
 			</div>
 			<div class="form-row">
@@ -139,7 +132,7 @@ $servername = "localhost";
 	<option value='12'>December</option>
 	</select>
 			</div>
-			
+
 			<div class="form-row">
 				<label for="totalprice">Year</label>
 				<div class="input-group">
@@ -158,14 +151,18 @@ $servername = "localhost";
 			</div>
 
 		</form>
+<form method="get" action="csv.php">
+		<p>Export as CSV:<input id="submit" type="submit" value="Export"/></p>
+	</form>
+
 </div><!-- /.form-container -->
 	<script src="js/jquery.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/angular.min.js"></script>
 </body>
-<?php 
+<?php
 
- 
+
 
 ?>
 </html>

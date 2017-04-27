@@ -2,7 +2,7 @@
 
 <html XMLns="http://www.w3.org/1999/xHTML">
 <head>
-	<title>Add Stock item</title>
+	<title>Add Stock Item</title>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 	<link href="css/bootstrap.min.css" rel="stylesheet" />
@@ -10,7 +10,7 @@
 </head>
 <body>
 
-<?php 
+<?php
 
   // define variables and set to empty values
   $pnameErr = $descErr = $rpriceErr = $pstockErr = $categoryErr = "";
@@ -18,7 +18,7 @@
 
   if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     //statement to see if name field is empty. If it is, populate error variable. If not, put data into name variable
-    
+
 
   if (empty($_POST['pname'])) {
     $pnameErr = "Product Name is required";
@@ -71,7 +71,7 @@
 		</div>
 	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 		<ul class="nav navbar-nav">
-			<li class="dropdown active">
+			<li class="dropdown">
 				<a href="#" class="dropdown-toggle" data-toggle="dropdown">SALES <span class="caret"></span></a>
 				<ul class="dropdown-menu" role="menu">
 					<li><a href="addsales.php">ADD SALES</a></li>
@@ -79,9 +79,9 @@
 					<li><a href="viewsales.php">DISPLAY SALES</a></li>
 				</ul>
 			</li>
-			<li><a href="#">GOODS RECEIVED</a></li>
+			<li class="active"><a href="addstock.php">STOCK</a></li>
 			<li><a href="#">REPORTING</a></li>
-			<li><a href="#">SALES</a></li>
+			<li><a href="#">PREDICTION</a></li>
 		</ul>
 		<ul class="nav navbar-nav navbar-right">
 			<li class="dropdown">
@@ -113,16 +113,16 @@
 			</div>
 			<div class="form-row">
 				<label for="pstock">Stock</label>
-				
+
 						<input type="number" name="pstock" id="pstock" />
 						<span class="error"><?php echo $pstockErr;?></span>
-				
+
 			</div>
 			<div class="form-row">
 				<label for="category">Category</label>
 				<div class="input-group">
-						
-					 
+
+
       <select name="category">
       <option value="Medecine">Medicine</option>
       <option value="Health Care Products">Health Care Products</option>
@@ -141,25 +141,15 @@
 	<script src="js/angular.min.js"></script>
 </body>
 <?php
- //if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+include 'connection.php';
 
-     $servername = "localhost";
-  $username = "dp2";
-  $password = "phpdp2";
-  $dbname = "dp2php";
-
-  // Create connection
-  $conn = new mysqli($servername, $username, $password, $dbname);
-  // Check connection
-  if ($conn === false) {
-    die("Connection failed: " . $conn->connect_error);}
-
+  connection();
   //SQl query to check if user already exists
-  
+
 
 
   if(!empty($pname) && !empty($desc) && !empty($rprice) && !empty($pstock)) {
-  
+
   $check="SELECT * FROM products WHERE ProductName = '$pname'";
   $rs = mysqli_query($conn,$check);
   $data = mysqli_fetch_array($rs, MYSQLI_NUM);
@@ -169,7 +159,7 @@
       //SQL statement to insert new record of user
       $sql = "INSERT INTO products (ProductName, ProductDescription, RetailPrice, Stock, Category)
       VALUES ('$pname', '$desc', '$rprice', $pstock, '$category')";
-  
+
 
       if($conn->query($sql) === TRUE){
        echo "Product successfully added.";
@@ -177,7 +167,7 @@
       else {
         echo "ERROR: Could not execute insert." . $conn->error;
       }
- 
+
   $conn->close();
     }
   // }
