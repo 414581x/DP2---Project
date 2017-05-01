@@ -19,7 +19,7 @@ $default = $_SESSION['$login_user'];
 
   // define variables and set to empty values
   $totalpriceErr = $saledateErr = "";
-  $staffno = $saledate = $totalprice = "";
+  $itemcode = $saledate = $totalprice = $rrp = "";
 
   if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     //statement to see if name field is empty. If it is, populate error variable. If not, put data into name variable
@@ -28,7 +28,9 @@ $default = $_SESSION['$login_user'];
 
   //statement to see if password field is empty. If it is, populate error variable. If not, put data into password variable
 
-     $staffno = isset($_POST['staffno']) ? $_POST['staffno'] : "";
+  	 $rrp = isset($_POST['rrp']) ? $_POST['rrp'] : "";
+
+     $itemcode = isset($_POST['itemcode']) ? $_POST['itemcode'] : "";
 
   //statement to see if password confirmation field is empty. If it is, populate error variable. If not, put data into confirmation password variable
  if (empty($_POST['saledate'])) {
@@ -98,7 +100,7 @@ $default = $_SESSION['$login_user'];
 			</div>
 			<div class="col-xs-6">
 				<div class="form-row">
-						<label for="staffno">Item Code</label>
+						<label for="itemcode">Item Code</label>
 						<input type="text" class="form-control" name="itemcode" id="itemcode" />
 				</div>
 				<div class="form-row">
@@ -106,9 +108,9 @@ $default = $_SESSION['$login_user'];
 						<textarea class="form-control" rows="5" name="desc" id="desc"></textarea>
 				</div>
 				<div class="form-row">
-					<label for="totalprice">RRP</label>
+					<label for="rrp">RRP</label>
 					<div class="input-group">
-						<input type="number" min="1" step="any" class="form-control" name="rrp" id="rrp" /><span class="error"><?php echo $totalpriceErr;?></span>
+						<input type="number" min="1" step="any" class="form-control" name="rrp" id="rrp" />
 					</div>
 				</div>
 				<div class="form-row">
@@ -130,7 +132,8 @@ $default = $_SESSION['$login_user'];
 			</div>
 			<div class="col-xs-12">
 				<div class="form-row">
-					<button type="submit" class="btn btn-primary">Submit</button>
+				<button type="submit" name="additem" >Additem</button>
+					<button type="submit" class="btn btn-primary" name="submit">Submit</button>
 				</div>
 			</div>
 		</div>
@@ -141,24 +144,74 @@ $default = $_SESSION['$login_user'];
 	<script src="js/angular.min.js"></script>
 </body>
 <?php
- //if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+ //
 
-      //$servername = "localhost";
-	  //$username = "dp2";
-	  //$password = "phpdp2";
-	  //$dbname = "dp2php";
+      $servername = "localhost";
+	  $username = "dp2";
+	  $password = "phpdp2";
+	  $dbname = "dp2php";
 
 	  // Create connection
-	  //$conn = new mysqli($servername, $username, $password, $dbname);
+	  $conn = new mysqli($servername, $username, $password, $dbname);
 	  // Check connection
-	  //if ($conn === false) {
-	    //die("Connection failed: " . $conn->connect_error);}
+	  if ($conn === false) {
+	    die("Connection failed: " . $conn->connect_error);}
 
   //SQl query to check if user already exists
-  include 'connection.php';
+  //include 'connection.php';
 
-  connection();
+  //connection();
 
+if (isset($_POST['additem'])) {
+
+	$query = "SELECT ProductNumber FROM additem";
+	$result = mysqli_query($conn, $query);
+
+
+if(empty($result)) {
+	
+		$maketemp = "
+			CREATE TABLE additem (
+      		`ProductNumber` int NOT NULL,
+      		`SalePriceTotal` decimal(10, 0),
+		    `QuantityOrdered` int		      
+		    )";
+
+		    $queryResult = @mysqli_query($conn, $maketemp)
+		Or die ("<p>Unable to query the table.</p>"."<p>Error code ". mysqli_errno($conn). ": ".mysqli_error($conn)). "</p>";
+ //mysql_query($maketemp, connection()) or die ("Sql error : ".mysql_error());
+	}
+
+
+
+  $inserttemp = "INSERT INTO additem (`ProductNumber`, `SalePriceTotal`, `QuantityOrdered`)
+    VALUES ('$itemcode', '$rrp', '$totalprice')";
+ mysqli_query($conn, $inserttemp) or die ("Sql error create : ".mysql_error());
+
+		$SQLstring = "SELECT * FROM additem";
+
+		if ($queryResult = mysqli_query($conn, $SQLstring)) {
+		
+
+		//Display a table with results
+	echo "<table width='100%' border='1'>";
+	echo "<th>ProductNumber</th><th>SalePriceTotal</th><th>QuantityOrdered</th>";
+	$row = mysqli_fetch_row($queryResult);
+
+	while ($row) {
+		echo "<tr><td>{$row[0]}</td>";
+		echo "<td>{$row[1]}</td>";
+		echo "<td>{$row[2]}</td></tr>";
+		
+
+		$row = mysqli_fetch_row($queryResult);
+	}
+	}
+
+
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   if(!empty($staffno) && !empty($saledate) && !empty($totalprice)) {
 
       //SQL statement to insert new record of user
@@ -175,6 +228,7 @@ $default = $_SESSION['$login_user'];
 
   $conn->close();
     }
+}
   // }
 ?>
 </html>
