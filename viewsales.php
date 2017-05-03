@@ -2,7 +2,7 @@
 
 <html XMLns="http://www.w3.org/1999/xHTML">
 <head>
-	<title>Add Sales Recors</title>
+	<title>View Sales Records</title>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 	<link href="css/bootstrap.min.css" rel="stylesheet" />
@@ -29,16 +29,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	//Concat 3 variables into 1 variable
 	$adate = $ayear. "-" .$amonth. "-" .$aday;
 
- $servername = "feenix-mariadb.swin.edu.au";
-  $username = "s414581x";
-  $password = "141083";
-  $dbname = "s414581x_db";
+include 'connection.php';
 
-  // Create connection
-  $conn = new mysqli($servername, $username, $password, $dbname);
-  // Check connection
-	 if ($conn === false) {
-	die("Connection failed: " . $conn->connect_error);}
+  connection();
 
 
 
@@ -94,9 +87,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 					<li><a href="viewsales.php">DISPLAY SALES</a></li>
 				</ul>
 			</li>
-			<li><a href="#">GOODS RECEIVED</a></li>
+			<li class="dropdown">
+				<a href="#" class="dropdown-toggle" data-toggle="dropdown">STOCK <span class="caret"></span></a>
+				<ul class="dropdown-menu" role="menu">
+					<li><a href="addstock.php">ADD STOCK ITEM</a></li>
+					<li><a href="#">STOCK COUNT</a></li>
+				</ul>
+			</li>
 			<li><a href="#">REPORTING</a></li>
-			<li><a href="#">SALES</a></li>
+			<li><a href="#">PREDICTION</a></li>
 		</ul>
 		<ul class="nav navbar-nav navbar-right">
 			<li class="dropdown">
@@ -118,8 +117,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 				<label for="staffno">Day</label>
 				<select name="aday" value=''><option>Day</option>
 	<?php for ($i = 1; $i <= 31; $i++) : ?>
-	  <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
-	  <?php endfor; ?></select>
+  	<option value="<?php echo $i; ?>"><?php echo $i; ?></option>
+  	<?php endfor; ?></select>
 
 			</div>
 			<div class="form-row">
@@ -148,19 +147,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	<option value="2018">2018</option>
 	</select>
 				</div>
+				<div class="form-row">
+				Select Date Item for Retrieve: <input type="radio" name="rdate" value="rdate">Request Date &nbsp; <input type="radio" name="pdate" value="pdate">Pick-up Date <br/>
+				</div
 			</div>
 			<br/>
 			<div class="form-row">
 				<button type="submit" class="btn btn-primary">Submit</button>
 			</div>
+
 		</form>
-	<form method="get" action="csv.php">
-		<p>Export as CSV: <input type="text" name="csv"><input id="submit" type="submit" value="Export"/></p>
+<form method="get" action="csv.php">
+		<p>Export as CSV:<input id="submit" type="submit" value="Export"/></p>
 	</form>
+
 </div><!-- /.form-container -->
 	<script src="js/jquery.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/angular.min.js"></script>
 </body>
+<?php
 
+
+
+?>
 </html>

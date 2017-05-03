@@ -2,7 +2,7 @@
 
 <html XMLns="http://www.w3.org/1999/xHTML">
 <head>
-	<title>Add Sales Recors</title>
+	<title>Add Sales Records</title>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 	<link href="css/bootstrap.min.css" rel="stylesheet" />
@@ -10,27 +10,27 @@
 </head>
 <body>
 
-<?php 
+<?php
 session_start();
 $default = "";
 $default = $_SESSION['$login_user'];
 
-echo $default;
+
 
   // define variables and set to empty values
   $totalpriceErr = $saledateErr = "";
-  $staffno = $saledate = $totalprice = "";
+  $itemcode = $saledate = $totalprice = $rrp = "";
 
   if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     //statement to see if name field is empty. If it is, populate error variable. If not, put data into name variable
-  
+
       //$inum = isset($_POST['inum']) ? $_POST['inum'] : "";
-  
 
   //statement to see if password field is empty. If it is, populate error variable. If not, put data into password variable
 
-     $staffno = isset($_POST['staffno']) ? $_POST['staffno'] : "";
-  
+  	 $rrp = isset($_POST['rrp']) ? $_POST['rrp'] : "";
+
+     $itemcode = isset($_POST['itemcode']) ? $_POST['itemcode'] : "";
 
   //statement to see if password confirmation field is empty. If it is, populate error variable. If not, put data into confirmation password variable
  if (empty($_POST['saledate'])) {
@@ -38,8 +38,6 @@ echo $default;
     } else {
       $saledate = isset($_POST['saledate']) ? $_POST['saledate'] : "";
   }
-     
-  
 
   //statement to see if email field is empty. If it is, populate error variable. If not, put data into email variable
  if (empty($_POST['totalprice'])) {
@@ -47,16 +45,11 @@ echo $default;
     } else {
       $totalprice = isset($_POST['totalprice']) ? $_POST['totalprice'] : "";
   }
-     
-  
-
-
 }
 ?>
 
-
 <nav class="navbar navbar-default" role="navigation">
-<div class="container-fluid">
+	<div class="container-fluid">
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
 				<span class="sr-only">Toggle navigation</span>
@@ -66,86 +59,165 @@ echo $default;
 			</button>
 			<a class="navbar-brand" href="cover.html">PHP Inc.</a>
 		</div>
-	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-		<ul class="nav navbar-nav">
-			<li class="dropdown active">
-				<a href="#" class="dropdown-toggle" data-toggle="dropdown">SALES <span class="caret"></span></a>
-				<ul class="dropdown-menu" role="menu">
-					<li><a href="addsales.php">ADD SALES</a></li>
-					<li><a href="edit.php">EDIT SALES</a></li>
-					<li><a href="viewsales.php">DISPLAY SALES</a></li>
-				</ul>
-			</li>
-			<li><a href="#">GOODS RECEIVED</a></li>
-			<li><a href="#">REPORTING</a></li>
-			<li><a href="#">SALES</a></li>
-		</ul>
-		<ul class="nav navbar-nav navbar-right">
-			<li class="dropdown">
-				<a href="#" class="dropdown-toggle" data-toggle="dropdown">User <span class="caret"></span></a>
-				<ul class="dropdown-menu" role="menu">
-					<li><a href="#">Create New User</a></li>
-					<li><a href="logout.php">Log Out</a></li>
-				</ul>
-			</li>
-		</ul>
-	</div><!-- /.navbar-collapse -->
-</div><!-- /.container-fluid -->
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			<ul class="nav navbar-nav">
+				<li class="dropdown active">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown">SALES <span class="caret"></span></a>
+					<ul class="dropdown-menu" role="menu">
+						<li><a href="addsales.php">ADD SALES</a></li>
+						<li><a href="edit.php">EDIT SALES</a></li>
+						<li><a href="viewsales.php">DISPLAY SALES</a></li>
+					</ul>
+				</li>
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown">STOCK <span class="caret"></span></a>
+					<ul class="dropdown-menu" role="menu">
+						<li><a href="addstock.php">ADD STOCK ITEM</a></li>
+						<li><a href="#">STOCK COUNT</a></li>
+					</ul>
+				</li>
+				<li><a href="#">REPORTING</a></li>
+				<li><a href="#">PREDICTION</a></li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown">User <span class="caret"></span></a>
+					<ul class="dropdown-menu" role="menu">
+						<li><a href="#">Create New User</a></li>
+						<li><a href="logout.php">Log Out</a></li>
+					</ul>
+				</li>
+			</ul>
+		</div><!-- /.navbar-collapse -->
+	</div><!-- /.container-fluid -->
 </nav>
 
 <div class="container">
-		<form action="" method="post">
-			<div class="form-row"><H1>Add Sales Record</H1></div>
-	<div class="form-row">
-				<label for="staffno">Staff Number</label>
-				<input type="number" class="form-control" name="staffno" id="staffno" value="<?php echo $default; ?>"/>
+	<form action="" method="post">
+		<div class="row">
+			<div class="col-xs-12">
+				<H1 class="text-center">Add Sales Record</H1>
 			</div>
-			<div class="form-row">
-				<label for="saledate">Date of Sale</label>
-				<input type="date" class="form-control" placeholder="YYYY-MM-DD" name="saledate" id="saledate" /><span class="error"><?php echo $saledateErr;?></span>
-			</div>
-			
-			<div class="form-row">
-				<label for="totalprice">Total Price</label>
-				<div class="input-group">
-					<input type="number" min="1" step="any" class="form-control" name="totalprice" id="totalprice" /><span class="error"><?php echo $totalpriceErr;?></span>
+			<div class="col-xs-6">
+				<div class="form-row">
+						<label for="itemcode">Item Code</label>
+						<input type="text" class="form-control" name="itemcode" id="itemcode" />
+				</div>
+				<div class="form-row">
+						<label for="staffno">Description</label>
+						<textarea class="form-control" rows="5" name="desc" id="desc"></textarea>
+				</div>
+				<div class="form-row">
+					<label for="rrp">RRP</label>
+					<div class="input-group">
+						<input type="number" min="1" step="any" class="form-control" name="rrp" id="rrp" />
+					</div>
+				</div>
+				<div class="form-row">
+					<label for="totalprice">Total Price</label>
+					<div class="input-group">
+						<input type="number" min="1" step="any" class="form-control" name="totalprice" id="totalprice" /><span class="error"><?php echo $totalpriceErr;?></span>
+					</div>
 				</div>
 			</div>
-			<br/>
-			<div class="form-row">
-				<button type="submit" class="btn btn-primary">Submit</button>
+			<div class="col-xs-6">
+				<div class="form-row">
+						<label for="staffno">Staff Number</label>
+						<input type="text" class="form-control" name="staffno" id="staffno" value="<?php echo $default; ?>"/>
+				</div>
+				<div class="form-row">
+					<label for="saledate">Date of Sale</label>
+					<input type="date" class="form-control" placeholder="YYYY-MM-DD" name="saledate" id="saledate" /><span class="error"><?php echo $saledateErr;?></span>
+				</div>
 			</div>
-		</form>
+			<div class="col-xs-12">
+				<div class="form-row">
+				<button type="submit" name="additem" >Additem</button>
+					<button type="submit" class="btn btn-primary" name="submit">Submit</button>
+				</div>
+			</div>
+		</div>
+	</form>
 </div><!-- /.form-container -->
 	<script src="js/jquery.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/angular.min.js"></script>
 </body>
 <?php
- //if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+ //
 
-  $servername = "feenix-mariadb.swin.edu.au";
-  $username = "s414581x";
-  $password = "141083";
-  $dbname = "s414581x_db";
+      $servername = "localhost";
+	  $username = "dp2";
+	  $password = "phpdp2";
+	  $dbname = "dp2php";
 
-  // Create connection
-  $conn = new mysqli($servername, $username, $password, $dbname);
-  // Check connection
-  if ($conn === false) {
-    die("Connection failed: " . $conn->connect_error);}
+	  // Create connection
+	  $conn = new mysqli($servername, $username, $password, $dbname);
+	  // Check connection
+	  if ($conn === false) {
+	    die("Connection failed: " . $conn->connect_error);}
 
   //SQl query to check if user already exists
-  
+  //include 'connection.php';
+
+  //connection();
+
+if (isset($_POST['additem'])) {
+
+	$query = "SELECT ProductNumber FROM additem";
+	$result = mysqli_query($conn, $query);
 
 
+if(empty($result)) {
+	
+		$maketemp = "
+			CREATE TABLE additem (
+      		`ProductNumber` int NOT NULL,
+      		`SalePriceTotal` decimal(10, 0),
+		    `QuantityOrdered` int		      
+		    )";
+
+		    $queryResult = @mysqli_query($conn, $maketemp)
+		Or die ("<p>Unable to query the table.</p>"."<p>Error code ". mysqli_errno($conn). ": ".mysqli_error($conn)). "</p>";
+ //mysql_query($maketemp, connection()) or die ("Sql error : ".mysql_error());
+	}
+
+
+
+  $inserttemp = "INSERT INTO additem (`ProductNumber`, `SalePriceTotal`, `QuantityOrdered`)
+    VALUES ('$itemcode', '$rrp', '$totalprice')";
+ mysqli_query($conn, $inserttemp) or die ("Sql error create : ".mysql_error());
+
+		$SQLstring = "SELECT * FROM additem";
+
+		if ($queryResult = mysqli_query($conn, $SQLstring)) {
+		
+
+		//Display a table with results
+	echo "<table width='100%' border='1'>";
+	echo "<th>ProductNumber</th><th>SalePriceTotal</th><th>QuantityOrdered</th>";
+	$row = mysqli_fetch_row($queryResult);
+
+	while ($row) {
+		echo "<tr><td>{$row[0]}</td>";
+		echo "<td>{$row[1]}</td>";
+		echo "<td>{$row[2]}</td></tr>";
+		
+
+		$row = mysqli_fetch_row($queryResult);
+	}
+	}
+
+
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   if(!empty($staffno) && !empty($saledate) && !empty($totalprice)) {
-  
-  
+
       //SQL statement to insert new record of user
       $sql = "INSERT INTO Sales (SalesDate, StaffNo, TotalPrice)
       VALUES ('$saledate', $staffno, $totalprice)";
-  
+
 
       if($conn->query($sql) === TRUE){
        echo "Sales Record successfully added.";
@@ -153,9 +225,10 @@ echo $default;
       else {
         echo "ERROR: Could not execute insert." . $conn->error;
       }
- 
+
   $conn->close();
     }
+}
   // }
 ?>
 </html>
