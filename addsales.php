@@ -17,34 +17,34 @@ $default = $_SESSION['$login_user'];
 
 
 
-  // define variables and set to empty values
-  $totalpriceErr = $saledateErr = "";
-  $itemcode = $saledate = $totalprice = $rrp = "";
+	// define variables and set to empty values
+	$totalpriceErr = $saledateErr = "";
+	$itemcode = $saledate = $totalprice = $rrp = "";
 
-  if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    //statement to see if name field is empty. If it is, populate error variable. If not, put data into name variable
+	if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+		//statement to see if name field is empty. If it is, populate error variable. If not, put data into name variable
 
-      //$inum = isset($_POST['inum']) ? $_POST['inum'] : "";
+			//$inum = isset($_POST['inum']) ? $_POST['inum'] : "";
 
-  //statement to see if password field is empty. If it is, populate error variable. If not, put data into password variable
+	//statement to see if password field is empty. If it is, populate error variable. If not, put data into password variable
 
-  	 $rrp = isset($_POST['rrp']) ? $_POST['rrp'] : "";
+		 $rrp = isset($_POST['rrp']) ? $_POST['rrp'] : "";
 
-     $itemcode = isset($_POST['itemcode']) ? $_POST['itemcode'] : "";
+		 $itemcode = isset($_POST['itemcode']) ? $_POST['itemcode'] : "";
 
-  //statement to see if password confirmation field is empty. If it is, populate error variable. If not, put data into confirmation password variable
+	//statement to see if password confirmation field is empty. If it is, populate error variable. If not, put data into confirmation password variable
  if (empty($_POST['saledate'])) {
-      $saledateErr = "Sale Date is required";
-    } else {
-      $saledate = isset($_POST['saledate']) ? $_POST['saledate'] : "";
-  }
+			$saledateErr = "Sale Date is required";
+		} else {
+			$saledate = isset($_POST['saledate']) ? $_POST['saledate'] : "";
+	}
 
-  //statement to see if email field is empty. If it is, populate error variable. If not, put data into email variable
+	//statement to see if email field is empty. If it is, populate error variable. If not, put data into email variable
  if (empty($_POST['totalprice'])) {
-      $totalpriceErr = "Total Price is required";
-    } else {
-      $totalprice = isset($_POST['totalprice']) ? $_POST['totalprice'] : "";
-  }
+			$totalpriceErr = "Total Price is required";
+		} else {
+			$totalprice = isset($_POST['totalprice']) ? $_POST['totalprice'] : "";
+	}
 }
 ?>
 
@@ -81,9 +81,9 @@ $default = $_SESSION['$login_user'];
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li class="dropdown">
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown">User <span class="caret"></span></a>
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span><?php echo $default; ?></span> <span class="caret"></span></a>
 					<ul class="dropdown-menu" role="menu">
-						<li><a href="#">Create New User</a></li>
+						<li><a href="register.php">Create New User</a></li>
 						<li><a href="logout.php">Log Out</a></li>
 					</ul>
 				</li>
@@ -101,22 +101,22 @@ $default = $_SESSION['$login_user'];
 			<div class="col-xs-6">
 				<div class="form-row">
 						<label for="itemcode">Item Code</label>
-						<input type="text" class="form-control" name="itemcode" id="itemcode" />
+						<input type="text" class="form-control" name="itemCode" id="itemCode" />
 				</div>
 				<div class="form-row">
-						<label for="staffno">Description</label>
-						<textarea class="form-control" rows="5" name="desc" id="desc"></textarea>
+						<label for="staffno">Item Name</label>
+						<input type="text" class="form-control" name="itemName" id="itemName" />
 				</div>
 				<div class="form-row">
-					<label for="rrp">RRP</label>
+					<label for="CostPrice">Cost Price</label>
 					<div class="input-group">
-						<input type="number" min="1" step="any" class="form-control" name="rrp" id="rrp" />
+						<input type="number" min="1" step="any" class="form-control" name="CostPrice" id="CostPrice" />
 					</div>
 				</div>
 				<div class="form-row">
-					<label for="totalprice">Total Price</label>
+					<label for="RetailPrice">Retal Price</label>
 					<div class="input-group">
-						<input type="number" min="1" step="any" class="form-control" name="totalprice" id="totalprice" /><span class="error"><?php echo $totalpriceErr;?></span>
+						<input type="number" min="1" step="any" class="form-control" name="RetailPrice" id="RetailPrice" /><span class="error"><?php echo $totalpriceErr;?></span>
 					</div>
 				</div>
 			</div>
@@ -145,22 +145,21 @@ $default = $_SESSION['$login_user'];
 </body>
 <?php
  //
+		$servername = "localhost";
+		$username = "dp2";
+		$password = "phpdp2";
+		$dbname = "dp2php";
 
-      $servername = "localhost";
-	  $username = "dp2";
-	  $password = "phpdp2";
-	  $dbname = "dp2php";
+		// Create connection
+		$conn = new mysqli($servername, $username, $password, $dbname);
+		// Check connection
+		if ($conn === false) {
+			die("Connection failed: " . $conn->connect_error);}
 
-	  // Create connection
-	  $conn = new mysqli($servername, $username, $password, $dbname);
-	  // Check connection
-	  if ($conn === false) {
-	    die("Connection failed: " . $conn->connect_error);}
+	//SQl query to check if user already exists
+	//include 'connection.php';
 
-  //SQl query to check if user already exists
-  //include 'connection.php';
-
-  //connection();
+	//connection();
 
 if (isset($_POST['additem'])) {
 
@@ -168,67 +167,57 @@ if (isset($_POST['additem'])) {
 	$result = mysqli_query($conn, $query);
 
 
-if(empty($result)) {
-	
-		$maketemp = "
-			CREATE TABLE additem (
-      		`ProductNumber` int NOT NULL,
-      		`SalePriceTotal` decimal(10, 0),
-		    `QuantityOrdered` int		      
-		    )";
+	if(empty($result)) {
 
-		    $queryResult = @mysqli_query($conn, $maketemp)
-		Or die ("<p>Unable to query the table.</p>"."<p>Error code ". mysqli_errno($conn). ": ".mysqli_error($conn)). "</p>";
- //mysql_query($maketemp, connection()) or die ("Sql error : ".mysql_error());
-	}
+			$maketemp = "CREATE TEMPORARY TABLE additem (
+										`ProductNumber` int NOT NULL,
+										`SalePriceTotal` decimal(10, 0),
+										`QuantityOrdered` int
+									)";
 
+			$queryResult = @mysqli_query($conn, $maketemp)
+			Or die ("<p>Unable to query the table.</p>"."<p>Error code ". mysqli_errno($conn). ": ".mysqli_error($conn)). "</p>";
+	 //mysql_query($maketemp, connection()) or die ("Sql error : ".mysql_error());
+		}
 
-
-  $inserttemp = "INSERT INTO additem (`ProductNumber`, `SalePriceTotal`, `QuantityOrdered`)
-    VALUES ('$itemcode', '$rrp', '$totalprice')";
- mysqli_query($conn, $inserttemp) or die ("Sql error create : ".mysql_error());
+		$inserttemp = "INSERT INTO additem (`ProductNumber`, `SalePriceTotal`, `QuantityOrdered`)
+								VALUES ('$itemcode', '$rrp', '$totalprice')";
+		 mysqli_query($conn, $inserttemp) or die ("Sql error create : ".mysql_error());
 
 		$SQLstring = "SELECT * FROM additem";
 
-		if ($queryResult = mysqli_query($conn, $SQLstring)) {
-		
-
+	if ($queryResult = mysqli_query($conn, $SQLstring)) {
 		//Display a table with results
 	echo "<table width='100%' border='1'>";
 	echo "<th>ProductNumber</th><th>SalePriceTotal</th><th>QuantityOrdered</th>";
 	$row = mysqli_fetch_row($queryResult);
 
-	while ($row) {
-		echo "<tr><td>{$row[0]}</td>";
-		echo "<td>{$row[1]}</td>";
-		echo "<td>{$row[2]}</td></tr>";
-		
+		while ($row) {
+			echo "<tr><td>{$row[0]}</td>";
+			echo "<td>{$row[1]}</td>";
+			echo "<td>{$row[2]}</td></tr>";
 
-		$row = mysqli_fetch_row($queryResult);
+			$row = mysqli_fetch_row($queryResult);
+		}
 	}
-	}
-
-
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-  if(!empty($staffno) && !empty($saledate) && !empty($totalprice)) {
 
-      //SQL statement to insert new record of user
-      $sql = "INSERT INTO Sales (SalesDate, StaffNo, TotalPrice)
-      VALUES ('$saledate', $staffno, $totalprice)";
+	if(!empty($staffno) && !empty($saledate) && !empty($totalprice)) {
+		//SQL statement to insert new record of user
+		$sql = "INSERT INTO Sales (SalesDate, StaffNo, TotalPrice)
+		VALUES ('$saledate', $staffno, $totalprice)";
 
-
-      if($conn->query($sql) === TRUE){
-       echo "Sales Record successfully added.";
-      }
-      else {
-        echo "ERROR: Could not execute insert." . $conn->error;
-      }
-
-  $conn->close();
-    }
+		if($conn->query($sql) === TRUE) {
+			 echo "Sales Record successfully added.";
+		}
+		else {
+			echo "ERROR: Could not execute insert." . $conn->error;
+		}
+	$conn->close();
+		}
 }
-  // }
+	// }
 ?>
 </html>
