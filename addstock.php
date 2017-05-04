@@ -55,6 +55,8 @@
   }
 
 }
+
+
 ?>
 
 
@@ -139,26 +141,36 @@
 	<script src="js/jquery.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/angular.min.js"></script>
-</body>
 <?php
-include 'connection.php';
+//include 'connection.php';
 
-  connection();
+  //connection();
   //SQl query to check if user already exists
-  
+     $servername = "localhost";
+  $username = "dp2";
+  $password = "phpdp2";
+  $dbname = "dp2php";
 
+  // Create connection
+  $conn = new mysqli($servername, $username, $password, $dbname);
+  // Check connection
+  if ($conn === false) {
+    die("Connection failed: " . $conn->connect_error);
+  }
 
-  if(!empty($pname) && !empty($desc) && !empty($rprice) && !empty($pstock)) {
-  
-  $check="SELECT * FROM Products WHERE ProductName = '$pname'";
+	$check="SELECT * FROM Products WHERE ProductName = '$pname'";
   $rs = mysqli_query($conn,$check);
   $data = mysqli_fetch_array($rs, MYSQLI_NUM);
   if($data[0] > 1) {
       echo "Product already exists! Please use edit to update the item or add a new item<br/>";
   }
+  else {
+  if(!empty($pname) && !empty($rprice) && !empty($pstock)) {
+ 
+  
       //SQL statement to insert new record of user
-      $sql = "INSERT INTO Products (ProductName, RetailPrice, Stock, CategoryID)
-      VALUES ('$pname', '$rprice', $pstock, $category)";
+      $sql = "INSERT INTO Products (ProductName, ProductDescription, RetailPrice, Stock, CategoryID)
+      VALUES ('$pname', '$desc', '$rprice', $pstock, $category)";
   
 
       if($conn->query($sql) === TRUE){
@@ -170,6 +182,8 @@ include 'connection.php';
  
   $conn->close();
     }
-  // }
+  }
 ?>
+</body>
+
 </html>
