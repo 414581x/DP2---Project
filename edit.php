@@ -12,30 +12,30 @@
 
 <?php
 $InvoiceNumber = $_GET['InvoiceNumber'];
-  // define variables and set to empty values
-  $totalpriceErr = "";
-  //$InvoiceNumber = "";
-  $staffno = $saledate = $totalprice = "";
+	// define variables and set to empty values
+	$totalpriceErr = "";
+	//$InvoiceNumber = "";
+	$staffno = $saledate = $totalprice = "";
 
-  if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    //statement to see if name field is empty. If it is, populate error variable. If not, put data into name variable
+	if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+		//statement to see if name field is empty. If it is, populate error variable. If not, put data into name variable
 
-      //$inum = isset($_POST['inum']) ? $_POST['inum'] : "";
-
-
-  //statement to see if password field is empty. If it is, populate error variable. If not, put data into password variable
-
-     $staffno = isset($_POST['staffno']) ? $_POST['staffno'] : "";
+			//$inum = isset($_POST['inum']) ? $_POST['inum'] : "";
 
 
-  //statement to see if password confirmation field is empty. If it is, populate error variable. If not, put data into confirmation password variable
+	//statement to see if password field is empty. If it is, populate error variable. If not, put data into password variable
 
-     $saledate = isset($_POST['saledate']) ? $_POST['saledate'] : "";
+		 $staffno = isset($_POST['staffno']) ? $_POST['staffno'] : "";
 
 
-  //statement to see if email field is empty. If it is, populate error variable. If not, put data into email variable
+	//statement to see if password confirmation field is empty. If it is, populate error variable. If not, put data into confirmation password variable
 
-     $totalprice = isset($_POST['totalprice']) ? $_POST['totalprice'] : "";
+		 $saledate = isset($_POST['saledate']) ? $_POST['saledate'] : "";
+
+
+	//statement to see if email field is empty. If it is, populate error variable. If not, put data into email variable
+
+		 $totalprice = isset($_POST['totalprice']) ? $_POST['totalprice'] : "";
 
 
 
@@ -76,7 +76,7 @@ $InvoiceNumber = $_GET['InvoiceNumber'];
 		</ul>
 		<ul class="nav navbar-nav navbar-right">
 			<li class="dropdown">
-				<a href="#" class="dropdown-toggle" data-toggle="dropdown">User <span class="caret"></span></a>
+				<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span><?php echo $default;?></span> <span class="caret"></span></a>
 				<ul class="dropdown-menu" role="menu">
 					<li><a href="#">Create New User</a></li>
 					<li><a href="logout.php">Log Out</a></li>
@@ -120,26 +120,26 @@ $InvoiceNumber = $_GET['InvoiceNumber'];
 
 include 'connection.php';
 
-  connection();
+	connection();
 
 
-  if(!empty($staffno) && !empty($saledate) && !empty($totalprice)) {
+	if(!empty($staffno) && !empty($saledate) && !empty($totalprice)) {
 
 
-      //SQL statement to insert new record of user
-      $sql = "UPDATE Sales SET SalesDate = '$saledate', StaffNo = '$staffno', TotalPrice='$totalprice' WHERE InvoiceNumber = $InvoiceNumber";
+			//SQL statement to insert new record of user
+			$sql = "UPDATE Sales SET SalesDate = '$saledate', StaffNo = '$staffno', TotalPrice='$totalprice' WHERE InvoiceNumber = $InvoiceNumber";
 
 
 
-      if($conn->query($sql) === TRUE){
-       echo "Sales Record successfully updated.";
-      }
-      else {
-        echo "ERROR: Could not execute update." . $conn->error;
-      }
+			if($conn->query($sql) === TRUE){
+			 echo "Sales Record successfully updated.";
+			}
+			else {
+				echo "ERROR: Could not execute update." . $conn->error;
+			}
 
-  $conn->close();
-    }
-  // }
+	$conn->close();
+		}
+	// }
 ?>
 </html>

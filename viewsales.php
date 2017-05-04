@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 include 'connection.php';
 
-  connection();
+	connection();
 
 
 
@@ -99,7 +99,7 @@ include 'connection.php';
 		</ul>
 		<ul class="nav navbar-nav navbar-right">
 			<li class="dropdown">
-				<a href="#" class="dropdown-toggle" data-toggle="dropdown">User <span class="caret"></span></a>
+				<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span><?php echo $default;?></span> <span class="caret"></span></a>
 				<ul class="dropdown-menu" role="menu">
 					<li><a href="#">Create New User</a></li>
 					<li><a href="logout.php">Log Out</a></li>
@@ -117,8 +117,8 @@ include 'connection.php';
 				<label for="staffno">Day</label>
 				<select name="aday" value=''><option>Day</option>
 	<?php for ($i = 1; $i <= 31; $i++) : ?>
-  	<option value="<?php echo $i; ?>"><?php echo $i; ?></option>
-  	<?php endfor; ?></select>
+		<option value="<?php echo $i; ?>"><?php echo $i; ?></option>
+		<?php endfor; ?></select>
 
 			</div>
 			<div class="form-row">

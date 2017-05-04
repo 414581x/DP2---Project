@@ -2,7 +2,7 @@
 
 <html XMLns="http://www.w3.org/1999/xHTML">
 <head>
-	<title>Add Stock Item</title>
+	<title>Add Stock item</title>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 	<link href="css/bootstrap.min.css" rel="stylesheet" />
@@ -12,50 +12,51 @@
 
 <?php
 
-  // define variables and set to empty values
-  $pnameErr = $descErr = $rpriceErr = $pstockErr = $categoryErr = "";
-  $pname = $desc = $rprice = $pstock = $category = "";
+	// define variables and set to empty values
+	$pnameErr = $descErr = $rpriceErr = $pstockErr = $categoryErr = "";
+	$pname = $desc = $rprice = $pstock = $category = "";
 
-  if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    //statement to see if name field is empty. If it is, populate error variable. If not, put data into name variable
+	if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+		//statement to see if name field is empty. If it is, populate error variable. If not, put data into name variable
 
 
-  if (empty($_POST['pname'])) {
-    $pnameErr = "Product Name is required";
-  } else {
-     $pname = isset($_POST['pname']) ? $_POST['pname'] : "";
-  }
+	if (empty($_POST['pname'])) {
+		$pnameErr = "Product Name is required";
+	} else {
+		 $pname = isset($_POST['pname']) ? $_POST['pname'] : "";
+	}
 
-  //statement to see if password field is empty. If it is, populate error variable. If not, put data into password variable
-  if (empty($_POST['description'])) {
-    $descErr = "Description is required";
-  } else {
-     $desc = isset($_POST['description']) ? $_POST['description'] : "";
-  }
+	//statement to see if password field is empty. If it is, populate error variable. If not, put data into password variable
+	if (empty($_POST['description'])) {
+		$descErr = "Description is required";
+	} else {
+		 $desc = isset($_POST['description']) ? $_POST['description'] : "";
+	}
 
-  //statement to see if password confirmation field is empty. If it is, populate error variable. If not, put data into confirmation password variable
-  if (empty($_POST['rprice'])) {
-    $rpriceErr = "Retail Price is required";
-  } else {
-     $rprice = isset($_POST['rprice']) ? $_POST['rprice'] : "";
-  }
+	//statement to see if password confirmation field is empty. If it is, populate error variable. If not, put data into confirmation password variable
+	if (empty($_POST['rprice'])) {
+		$rpriceErr = "Retail Price is required";
+	} else {
+		 $rprice = isset($_POST['rprice']) ? $_POST['rprice'] : "";
+	}
 
-  //statement to see if email field is empty. If it is, populate error variable. If not, put data into email variable
-  if (empty($_POST['pstock'])) {
-    $pstockErr = "Stock amount is required";
-  } else {
-     $pstock = isset($_POST['pstock']) ? $_POST['pstock'] : "";
-  }
+	//statement to see if email field is empty. If it is, populate error variable. If not, put data into email variable
+	if (empty($_POST['pstock'])) {
+		$pstockErr = "Stock amount is required";
+	} else {
+		 $pstock = isset($_POST['pstock']) ? $_POST['pstock'] : "";
+	}
 
-  //statement to see if phone field is empty. If it is, populate error variable. If not, put data into phone variable
-  if (empty($_POST['category'])) {
-    $categoryErr = "Category is required";
-  } else {
-    $category = isset($_POST['category']) ? $_POST['category'] : "";
-  }
+	//statement to see if phone field is empty. If it is, populate error variable. If not, put data into phone variable
+	if (empty($_POST['category'])) {
+		$categoryErr = "Category is required";
+	} else {
+		$category = isset($_POST['category']) ? $_POST['category'] : "";
+	}
 
 }
 ?>
+
 
 <nav class="navbar navbar-default" role="navigation">
 <div class="container-fluid">
@@ -66,11 +67,11 @@
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="index.php">PHP Inc.</a>
+			<a class="navbar-brand" href="cover.html">PHP Inc.</a>
 		</div>
 	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 		<ul class="nav navbar-nav">
-			<li class="dropdown">
+			<li class="dropdown active">
 				<a href="#" class="dropdown-toggle" data-toggle="dropdown">SALES <span class="caret"></span></a>
 				<ul class="dropdown-menu" role="menu">
 					<li><a href="addsales.php">ADD SALES</a></li>
@@ -78,19 +79,13 @@
 					<li><a href="viewsales.php">DISPLAY SALES</a></li>
 				</ul>
 			</li>
-			<li class="dropdown active">
-				<a href="#" class="dropdown-toggle" data-toggle="dropdown">STOCK <span class="caret"></span></a>
-				<ul class="dropdown-menu" role="menu">
-					<li><a href="addstock.php">ADD STOCK ITEM</a></li>
-					<li><a href="#">STOCK COUNT</a></li>
-				</ul>
-			</li>
+			<li><a href="#">GOODS RECEIVED</a></li>
 			<li><a href="#">REPORTING</a></li>
-			<li><a href="#">PREDICTION</a></li>
+			<li><a href="#">SALES</a></li>
 		</ul>
 		<ul class="nav navbar-nav navbar-right">
 			<li class="dropdown">
-				<a href="#" class="dropdown-toggle" data-toggle="dropdown">User <span class="caret"></span></a>
+				<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span><?php echo $default;?></span> <span class="caret"></span></a>
 				<ul class="dropdown-menu" role="menu">
 					<li><a href="#">Create New User</a></li>
 					<li><a href="logout.php">Log Out</a></li>
@@ -128,11 +123,11 @@
 				<div class="input-group">
 
 
-      <select name="category">
-      <option value="Medecine">Medicine</option>
-      <option value="Health Care Products">Health Care Products</option>
-      <option value="Accessories">Accessories</option>
-      </select> <br/>
+			<select name="category">
+			<option value="1">Medicine</option>
+			<option value="2">Health Care Products</option>
+			<option value="3">Accessories</option>
+			</select> <br/>
 				</div>
 			</div>
 			<br/>
@@ -148,33 +143,33 @@
 <?php
 include 'connection.php';
 
-  connection();
-  //SQl query to check if user already exists
+	connection();
+	//SQl query to check if user already exists
 
 
 
-  if(!empty($pname) && !empty($desc) && !empty($rprice) && !empty($pstock)) {
+	if(!empty($pname) && !empty($desc) && !empty($rprice) && !empty($pstock)) {
 
-  $check="SELECT * FROM products WHERE ProductName = '$pname'";
-  $rs = mysqli_query($conn,$check);
-  $data = mysqli_fetch_array($rs, MYSQLI_NUM);
-  if($data[0] > 1) {
-      echo "Product already exists! Please use edit to update the item or add a new item<br/>";
-  }
-      //SQL statement to insert new record of user
-      $sql = "INSERT INTO products (ProductName, ProductDescription, RetailPrice, Stock, Category)
-      VALUES ('$pname', '$desc', '$rprice', $pstock, '$category')";
+	$check="SELECT * FROM Products WHERE ProductName = '$pname'";
+	$rs = mysqli_query($conn,$check);
+	$data = mysqli_fetch_array($rs, MYSQLI_NUM);
+	if($data[0] > 1) {
+			echo "Product already exists! Please use edit to update the item or add a new item<br/>";
+	}
+			//SQL statement to insert new record of user
+			$sql = "INSERT INTO Products (ProductName, RetailPrice, Stock, CategoryID)
+			VALUES ('$pname', '$rprice', $pstock, $category)";
 
 
-      if($conn->query($sql) === TRUE){
-       echo "Product successfully added.";
-      }
-      else {
-        echo "ERROR: Could not execute insert." . $conn->error;
-      }
+			if($conn->query($sql) === TRUE){
+			 echo "Product successfully added.";
+			}
+			else {
+				echo "ERROR: Could not execute insert." . $conn->error;
+			}
 
-  $conn->close();
-    }
-  // }
+	$conn->close();
+		}
+	// }
 ?>
 </html>
