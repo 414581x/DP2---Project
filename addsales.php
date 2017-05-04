@@ -15,8 +15,6 @@ session_start();
 $default = "";
 $default = $_SESSION['$login_user'];
 
-
-
 	// define variables and set to empty values
 	$totalpriceErr = $saledateErr = "";
 	$itemcode = $saledate = $totalprice = $rrp = "";
