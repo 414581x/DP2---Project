@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 
-<html XMLns="http://www.w3.org/1999/xHTML">
+<html XMLns="http://www.w3.org/1999/xHTML" lang="en" data-ng-app="App">
 <head>
 	<title>Add Sales Records</title>
 	<meta charset="utf-8" />
@@ -8,7 +8,7 @@
 	<link href="css/bootstrap.min.css" rel="stylesheet" />
 	<link href="css/add-sales.css" rel="stylesheet" />
 </head>
-<body>
+<body data-ng-controller="myCtrl">
 
 <?php
 session_start();
@@ -91,7 +91,7 @@ $default = $_SESSION['$login_user'];
 </nav>
 
 <div class="container">
-	<form action="" method="post">
+	<form action="" method="post" name="myForm">
 		<div class="row">
 			<div class="col-xs-12">
 				<H1 class="text-center">Add Sales Record</H1>
@@ -99,7 +99,8 @@ $default = $_SESSION['$login_user'];
 			<div class="col-xs-6">
 				<div class="form-row">
 						<label for="itemcode">Item Code</label>
-						<input type="text" class="form-control" name="itemCode" id="itemCode" />
+						<input type="text" class="form-control" name="itemCode" id="itemCode" data-ng-pattern="itemCode" data-ng-required="true"/>
+						<p data-ng-show="myForm.itemCode.$error.pattern">Only number allowed for item code, 6 digits</p>
 				</div>
 				<div class="form-row">
 						<label for="staffno">Item Name</label>
@@ -109,6 +110,7 @@ $default = $_SESSION['$login_user'];
 					<label for="CostPrice">Cost Price</label>
 					<div class="input-group">
 						<input type="number" min="1" step="any" class="form-control" name="CostPrice" id="CostPrice" />
+						<p data-ng-show="myForm.pcode.$error.pattern">Only number allowed for price</p>
 					</div>
 				</div>
 				<div class="form-row">
@@ -140,6 +142,8 @@ $default = $_SESSION['$login_user'];
 	<script src="js/jquery.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/angular.min.js"></script>
+	<!-- client side validation -->
+	<script src="js/validation.js"></script>
 </body>
 <?php
  //
