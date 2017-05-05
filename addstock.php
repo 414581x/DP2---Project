@@ -10,8 +10,9 @@
 </head>
 <body>
 
-<?php
+<?php 
 
+<<<<<<< HEAD
 	// define variables and set to empty values
 	$pnameErr = $descErr = $rpriceErr = $pstockErr = $categoryErr = "";
 	$pname = $desc = $rprice = $pstock = $category = "";
@@ -53,8 +54,53 @@
 	} else {
 		$category = isset($_POST['category']) ? $_POST['category'] : "";
 	}
+=======
+  // define variables and set to empty values
+  $pnameErr = $descErr = $rpriceErr = $pstockErr = $categoryErr = "";
+  $pname = $desc = $rprice = $pstock = $category = "";
+
+  if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    //statement to see if name field is empty. If it is, populate error variable. If not, put data into name variable
+    
+
+  if (empty($_POST['pname'])) {
+    $pnameErr = "Product Name is required";
+  } else {
+     $pname = isset($_POST['pname']) ? $_POST['pname'] : "";
+  }
+
+  //statement to see if password field is empty. If it is, populate error variable. If not, put data into password variable
+  if (empty($_POST['description'])) {
+    $descErr = "Description is required";
+  } else {
+     $desc = isset($_POST['description']) ? $_POST['description'] : "";
+  }
+
+  //statement to see if password confirmation field is empty. If it is, populate error variable. If not, put data into confirmation password variable
+  if (empty($_POST['rprice'])) {
+    $rpriceErr = "Retail Price is required";
+  } else {
+     $rprice = isset($_POST['rprice']) ? $_POST['rprice'] : "";
+  }
+
+  //statement to see if email field is empty. If it is, populate error variable. If not, put data into email variable
+  if (empty($_POST['pstock'])) {
+    $pstockErr = "Stock amount is required";
+  } else {
+     $pstock = isset($_POST['pstock']) ? $_POST['pstock'] : "";
+  }
+
+  //statement to see if phone field is empty. If it is, populate error variable. If not, put data into phone variable
+  if (empty($_POST['category'])) {
+    $categoryErr = "Category is required";
+  } else {
+    $category = isset($_POST['category']) ? $_POST['category'] : "";
+  }
+>>>>>>> ee46687fe381e04dea4cc2d5944e90e2efc98e44
 
 }
+
+
 ?>
 
 
@@ -113,14 +159,15 @@
 			</div>
 			<div class="form-row">
 				<label for="pstock">Stock</label>
-
+				
 						<input type="number" name="pstock" id="pstock" />
 						<span class="error"><?php echo $pstockErr;?></span>
-
+				
 			</div>
 			<div class="form-row">
 				<label for="category">Category</label>
 				<div class="input-group">
+<<<<<<< HEAD
 
 
 			<select name="category">
@@ -128,6 +175,15 @@
 			<option value="2">Health Care Products</option>
 			<option value="3">Accessories</option>
 			</select> <br/>
+=======
+						
+					 
+      <select name="category">
+      <option value="1">Medicine</option>
+      <option value="2">Health Care Products</option>
+      <option value="3">Accessories</option>
+      </select> <br/>
+>>>>>>> ee46687fe381e04dea4cc2d5944e90e2efc98e44
 				</div>
 			</div>
 			<br/>
@@ -139,10 +195,10 @@
 	<script src="js/jquery.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/angular.min.js"></script>
-</body>
 <?php
-include 'connection.php';
+//include 'connection.php';
 
+<<<<<<< HEAD
 	connection();
 	//SQl query to check if user already exists
 
@@ -171,5 +227,48 @@ include 'connection.php';
 	$conn->close();
 		}
 	// }
+=======
+  //connection();
+  //SQl query to check if user already exists
+     $servername = "localhost";
+  $username = "dp2";
+  $password = "phpdp2";
+  $dbname = "dp2php";
+
+  // Create connection
+  $conn = new mysqli($servername, $username, $password, $dbname);
+  // Check connection
+  if ($conn === false) {
+    die("Connection failed: " . $conn->connect_error);
+  }
+
+	$check="SELECT * FROM Products WHERE ProductName = '$pname'";
+  $rs = mysqli_query($conn,$check);
+  $data = mysqli_fetch_array($rs, MYSQLI_NUM);
+  if($data[0] > 1) {
+      echo "Product already exists! Please use edit to update the item or add a new item<br/>";
+  }
+  else {
+  if(!empty($pname) && !empty($rprice) && !empty($pstock)) {
+ 
+  
+      //SQL statement to insert new record of user
+      $sql = "INSERT INTO Products (ProductName, ProductDescription, RetailPrice, Stock, CategoryID)
+      VALUES ('$pname', '$desc', '$rprice', $pstock, $category)";
+  
+
+      if($conn->query($sql) === TRUE){
+       echo "Product successfully added.";
+      }
+      else {
+        echo "ERROR: Could not execute insert." . $conn->error;
+      }
+ 
+  $conn->close();
+    }
+  }
+>>>>>>> ee46687fe381e04dea4cc2d5944e90e2efc98e44
 ?>
+</body>
+
 </html>
