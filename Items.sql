@@ -1,24 +1,25 @@
 create table Items (
 	Item_ID INT not null,
-	Item_Type VARCHAR(11) not null,
+	Category_ID INT not null,
 	Brand VARCHAR(50) not null,
 	Item_Name VARCHAR(50) not null,
 	Qty INT not null,
-	Price VARCHAR(50) not null,
-    primary key (Item_ID)
+	Price DECIMAL(8,2) not null,
+    primary key (Item_ID),
+    FOREIGN KEY (Category_ID) REFERENCES Category(Category_ID)
 );
-insert into Items (Item_ID, Item_Type, Brand, Item_Name, Qty, Price) values (1, 'health care', 'Xylocaine', 'LIDOCAINE HYDROCHLORIDE', 1, '$12.89');
-insert into Items (Item_ID, Item_Type, Brand, Item_Name, Qty, Price) values (2, 'health care', 'Diltiazem ', 'Diltiazem Hydrochloride', 4, '$49.28');
-insert into Items (Item_ID, Item_Type, Brand, Item_Name, Qty, Price) values (3, 'medicine', 'TERRACOTTA JOLI ', 'OCTINOXATE, TITANIUM DIOXIDE', 2, '$27.85');
-insert into Items (Item_ID, Item_Type, Brand, Item_Name, Qty, Price) values (4, 'accessories', 'Risperidone', 'Risperidone', 10, '$44.72');
-insert into Items (Item_ID, Item_Type, Brand, Item_Name, Qty, Price) values (5, 'health care', 'VITALUMIERE AQUA', 'OCTINOXATE and TITANIUM DIOXIDE', 4, '$5.50');
-insert into Items (Item_ID, Item_Type, Brand, Item_Name, Qty, Price) values (6, 'accessories', 'Gabapentin', 'Gabapentin', 1, '$46.78');
-insert into Items (Item_ID, Item_Type, Brand, Item_Name, Qty, Price) values (7, 'medicine', 'Terazos', 'Terazosin hydrochloride', 5, '$1.98');
-insert into Items (Item_ID, Item_Type, Brand, Item_Name, Qty, Price) values (8, 'accessories', 'Keppra', 'levetiracetam', 10, '$43.43');
-insert into Items (Item_ID, Item_Type, Brand, Item_Name, Qty, Price) values (9, 'medicine', 'Prenatal Plus', '.beta.-carotene, sodium acetate', 4, '$17.81');
-insert into Items (Item_ID, Item_Type, Brand, Item_Name, Qty, Price) values (10, 'health care', 'LEVOBUNOLOL HYDROCHLORIDE', 'levobunolol hydrochloride', 10, '$26.82');
-insert into Items (Item_ID, Item_Type, Brand, Item_Name, Qty, Price) values (11, 'health care', 'ziprasidone hydrochloride', 'Ziprasidone HCl', 1, '$36.66');
-insert into Items (Item_ID, Item_Type, Brand, Item_Name, Qty, Price) values (12, 'health care', 'Dr Young 2p Blemish Base SPF35 PA', 'ALLANTOIN', 7, '$33.15');
-insert into Items (Item_ID, Item_Type, Brand, Item_Name, Qty, Price) values (13, 'accessories', 'Hydrocortisone', 'Hydrocortisone', 8, '$42.99');
-insert into Items (Item_ID, Item_Type, Brand, Item_Name, Qty, Price) values (14, 'accessories', 'equate anti nausea', 'Dextrose (glucose)', 9, '$2.21');
-insert into Items (Item_ID, Item_Type, Brand, Item_Name, Qty, Price) values (15, 'health care', 'Bisac-Evac', 'Bisacodyl', 8, '$23.53');
+insert into Items (Item_ID, Category_ID, Brand, Item_Name, Qty, Price) values (1, 3, 'Aconite', 'Aconitum napellus,', 70, 46.61);
+insert into Items (Item_ID, Category_ID, Brand, Item_Name, Qty, Price) values (2, 1, 'Hydrochlorothiazide', 'Hydrochlorothiazide', 79, 94.59);
+insert into Items (Item_ID, Category_ID, Brand, Item_Name, Qty, Price) values (3, 3, 'Doxycycline Hyclate Capsules', 'Doxycycline Hyclate', 22, 19.07);
+insert into Items (Item_ID, Category_ID, Brand, Item_Name, Qty, Price) values (4, 1, 'Doxycycline', 'Doxycycline', 18, 99.24);
+insert into Items (Item_ID, Category_ID, Brand, Item_Name, Qty, Price) values (5, 1, 'Amoxicillin and Clavulanate Potassium', 'Amoxicillin and Clavulanate Potassium', 79, 21.96);
+insert into Items (Item_ID, Category_ID, Brand, Item_Name, Qty, Price) values (6, 1, 'Etodolac', 'Etodolac', 94, 59.24);
+insert into Items (Item_ID, Category_ID, Brand, Item_Name, Qty, Price) values (7, 2, 'hemorrhoidal', 'glycerin, phenylephrine HCl', 67, 11.2);
+insert into Items (Item_ID, Category_ID, Brand, Item_Name, Qty, Price) values (8, 1, 'Imipramine Pamoate', 'Imipramine Pamoate', 23, 57.45);
+insert into Items (Item_ID, Category_ID, Brand, Item_Name, Qty, Price) values (9, 3, 'PROMETHAZINE DM', 'Dextromethorphan Hydrobromide ', 2, 34.52);
+insert into Items (Item_ID, Category_ID, Brand, Item_Name, Qty, Price) values (10, 2, 'Jentadueto', 'linagliptin', 27, 78.83);
+insert into Items (Item_ID, Category_ID, Brand, Item_Name, Qty, Price) values (11, 1, 'Haloperidol', 'Haloperidol', 65, 89.06);
+insert into Items (Item_ID, Category_ID, Brand, Item_Name, Qty, Price) values (12, 2, 'Acyclovir', 'Acyclovir', 54, 69.35);
+insert into Items (Item_ID, Category_ID, Brand, Item_Name, Qty, Price) values (13, 1, 'Furosemide', 'Furosemide', 97, 85.62);
+insert into Items (Item_ID, Category_ID, Brand, Item_Name, Qty, Price) values (14, 3, 'TYLENOL with Codeine', 'acetaminophen and codeine phosphate', 38, 24.9);
+insert into Items (Item_ID, Category_ID, Brand, Item_Name, Qty, Price) values (15, 3, 'ANTIBACTERIAL HAND', 'CHLOROXYLENOL', 91, 7.91);

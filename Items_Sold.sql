@@ -1,22 +1,20 @@
 create table Items_Sold (
-	Item_Id INT Not Null,
-	No_Sold INT Not Null,
-	Date_Sold DATE Not Null,
-    primary key (Item_Id, Date_Sold),
-    FOREIGN KEY (Item_ID) REFERENCES Items(Item_ID)
+	Invoice_ID INT not null,
+	Item_ID INT not null,
+	Qty INT not null,
+	Cost DECIMAL(12,2) not null,
+    primary key (Invoice_ID, Item_ID),
+    FOREIGN KEY (Item_ID) REFERENCES Items(Item_ID),
+    FOREIGN KEY (Invoice_ID) REFERENCES Sales(Invoice_ID)
 );
-insert into Items_Sold (Item_Id, No_Sold, Date_Sold) values (1, 87, '2016-09-27');
-insert into Items_Sold (Item_Id, No_Sold, Date_Sold) values (2, 78, '2016-05-24');
-insert into Items_Sold (Item_Id, No_Sold, Date_Sold) values (3, 70, '2017-04-10');
-insert into Items_Sold (Item_Id, No_Sold, Date_Sold) values (4, 11, '2016-08-27');
-insert into Items_Sold (Item_Id, No_Sold, Date_Sold) values (5, 25, '2016-05-02');
-insert into Items_Sold (Item_Id, No_Sold, Date_Sold) values (6, 82, '2017-01-15');
-insert into Items_Sold (Item_Id, No_Sold, Date_Sold) values (7, 66, '2016-06-20');
-insert into Items_Sold (Item_Id, No_Sold, Date_Sold) values (8, 82, '2016-06-18');
-insert into Items_Sold (Item_Id, No_Sold, Date_Sold) values (9, 26, '2016-07-02');
-insert into Items_Sold (Item_Id, No_Sold, Date_Sold) values (10, 95, '2016-05-31');
-insert into Items_Sold (Item_Id, No_Sold, Date_Sold) values (11, 33, '2016-09-09');
-insert into Items_Sold (Item_Id, No_Sold, Date_Sold) values (12, 76, '2016-10-24');
-insert into Items_Sold (Item_Id, No_Sold, Date_Sold) values (13, 51, '2017-02-01');
-insert into Items_Sold (Item_Id, No_Sold, Date_Sold) values (14, 56, '2017-01-03');
-insert into Items_Sold (Item_Id, No_Sold, Date_Sold) values (15, 19, '2016-10-04');
+insert into Items_Sold (Invoice_ID, Item_ID, Qty, Cost) values (1, 3, 43, 820.01);
+insert into Items_Sold (Invoice_ID, Item_ID, Qty, Cost) values (2, 4, 26, 2580.24);
+insert into Items_Sold (Invoice_ID, Item_ID, Qty, Cost) values (3, 3, 19, 362.33);
+insert into Items_Sold (Invoice_ID, Item_ID, Qty, Cost) values (4, 1, 76, 3542.36);
+insert into Items_Sold (Invoice_ID, Item_ID, Qty, Cost) values (5, 2, 72, 6810.48);
+insert into Items_Sold (Invoice_ID, Item_ID, Qty, Cost) values (6, 2, 37, 3499.83);
+insert into Items_Sold (Invoice_ID, Item_ID, Qty, Cost) values (7, 3, 59, 1125.13);
+insert into Items_Sold (Invoice_ID, Item_ID, Qty, Cost) values (8, 2, 15, 1418.85);
+insert into Items_Sold (Invoice_ID, Item_ID, Qty, Cost) values (9, 4, 3, 297.72);
+insert into Items_Sold (Invoice_ID, Item_ID, Qty, Cost) values (10, 4, 70, 6946.8);
+

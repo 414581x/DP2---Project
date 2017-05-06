@@ -3,7 +3,8 @@ create table Staff (
 	First_Name VARCHAR(50) not null,
 	Last_Name VARCHAR(50) not null,
 	Staff_Position VARCHAR(11) not null,
-	Staff_Password VARCHAR(50) not null
+	Staff_Password VARCHAR(50) not null,
+    primary key (Staff_ID)
 );
 insert into Staff (Staff_ID, First_Name, Last_Name, Staff_Position, Staff_Password) values ('rthorrington0', 'Richardo', 'Ladloe', 'Chemist', '5n488IJ7oo');
 insert into Staff (Staff_ID, First_Name, Last_Name, Staff_Position, Staff_Password) values ('dmckennan1', 'Devy', 'Albrecht', 'Chemist', 'bnmTBlb4');
