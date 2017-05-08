@@ -2,7 +2,7 @@
 
 <html XMLns="http://www.w3.org/1999/xHTML">
 <head>
-	<title>PHP Inc.</title>
+	<title>Login</title>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 	<link href="css/bootstrap.min.css" rel="stylesheet" />
@@ -17,12 +17,11 @@ header("location: addsales.php");
 // define variables and set to empty values
 $staffnoErr = $passwordErr = "";
 $LoginNumber = $LoginPassword = "";
-if ($_SERVER['REQUEST_METHOD'] === 'POST')
-{
-	if (empty($_POST['staffno'])) {
-		$staffnoErr = "Staff Number is required";
-	} else {
-		$LoginNumber=isset($_POST['staffno']) ? $_POST['staffno'] : "";
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+		if (empty($_POST['staffno'])) {
+			$staffnoErr = "Staff Number is required";
+		} else {
+			$LoginNumber=isset($_POST['staffno']) ? $_POST['staffno'] : "";
 	}
 	//statement to see if password field is empty. If it is, populate error variable. If not, put data into password variable
 	if (empty($_POST['lpassword'])) {
@@ -30,7 +29,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
 	} else {
 		 $LoginPassword = isset($_POST['lpassword']) ? $_POST['lpassword'] : "";
 	}
-}
+
+	}
 ?>
 
 <div class="jumbotron text-center">
@@ -49,17 +49,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
 				</div>
 				<div class="form-row">
 					<label for="lpassword">Password</label>
-					<input type="password" class="form-control" name="lpassword" id="lpassword" /><span class="error"><?php echo $passwordErr;?></span>
+					<input type="text" class="form-control" name="lpassword" id="lpassword" /><span class="error"><?php echo $passwordErr;?></span>
 				</div>
 			<br/>
 				<div class="form-row">
 					<button type="submit" class="btn btn-primary" value="Login">Log In</button>
 				</div>
-				<div class="form-row">
-					<p class="text-center">Don't have an account?</p>
-					<a href="#" class="btn btn-primary">Create New User</a>
-				</div>
 			</form>
+		</div>
+
+		<div class="col-xs-12 center-block">
+			<p class="text-center">Don't have an account?</p>
+			<a href="#" class="btn btn-primary">Create New User</a>
 		</div>
 	</div>
 </div>
@@ -72,11 +73,10 @@ if (!empty($LoginNumber) && !empty($LoginPassword))
 {
 	//include the php file with the connection details
 	include 'connection.php';
-	//call the function to connect to the database
-  	connection();
+	
 
 	//SQL query to select the correct table row where the customer number and password match
-	$sql = "SELECT * FROM Staff WHERE StaffID = $LoginNumber AND $LoginPassword = '$LoginPassword'" ;
+	$sql = "SELECT * FROM Staff WHERE StaffID = $LoginNumber AND Password = '$LoginPassword'" ;
 //if($conn->query($sql) === TRUE){
 	$_SESSION['$login_user']=$LoginNumber; // Initializing Session
 	header("location: addsales.php"); // Redirecting to addsales.php
