@@ -2,7 +2,7 @@
 
 <html XMLns="http://www.w3.org/1999/xHTML">
 <head>
-	<title>Edit Sales Records</title>
+	<title>Add Sales Recors</title>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 	<link href="css/bootstrap.min.css" rel="stylesheet" />
@@ -10,36 +10,24 @@
 </head>
 <body>
 
-<?php
-$InvoiceNumber = $_GET['InvoiceNumber'];
-	// define variables and set to empty values
-	$totalpriceErr = "";
-	//$InvoiceNumber = "";
-	$staffno = $saledate = $totalprice = "";
+<?php 
+$ItemID = $_GET['ItemID'];
 
-	if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-		//statement to see if name field is empty. If it is, populate error variable. If not, put data into name variable
+ $servername = "localhost";
+  $username = "dp2";
+  $password = "phpdp2";
+  $dbname = "dp2php";
+ 
 
-			//$inum = isset($_POST['inum']) ? $_POST['inum'] : "";
+  // Create connection
+  	$conn = new mysqli($servername, $username, $password, $dbname);
+  // Check connection
+ 	if ($conn === false) {
+    die("Connection failed: " . $conn->connect_error);}
 
-
-	//statement to see if password field is empty. If it is, populate error variable. If not, put data into password variable
-
-		 $staffno = isset($_POST['staffno']) ? $_POST['staffno'] : "";
-
-
-	//statement to see if password confirmation field is empty. If it is, populate error variable. If not, put data into confirmation password variable
-
-		 $saledate = isset($_POST['saledate']) ? $_POST['saledate'] : "";
-
-
-	//statement to see if email field is empty. If it is, populate error variable. If not, put data into email variable
-
-		 $totalprice = isset($_POST['totalprice']) ? $_POST['totalprice'] : "";
-
-
-
-}
+	$query = "SELECT * from Items where ItemID='".$ItemID."'"; 
+	$result = mysqli_query($conn, $query) or die ( mysqli_error());
+	$row = mysqli_fetch_assoc($result);
 ?>
 
 
@@ -64,19 +52,13 @@ $InvoiceNumber = $_GET['InvoiceNumber'];
 					<li><a href="viewsales.php">DISPLAY SALES</a></li>
 				</ul>
 			</li>
-			<li class="dropdown">
-				<a href="#" class="dropdown-toggle" data-toggle="dropdown">STOCK <span class="caret"></span></a>
-				<ul class="dropdown-menu" role="menu">
-					<li><a href="addstock.php">ADD STOCK ITEM</a></li>
-					<li><a href="#">STOCK COUNT</a></li>
-				</ul>
-			</li>
+			<li><a href="#">GOODS RECEIVED</a></li>
 			<li><a href="#">REPORTING</a></li>
-			<li><a href="#">PREDICTION</a></li>
+			<li><a href="#">SALES</a></li>
 		</ul>
 		<ul class="nav navbar-nav navbar-right">
 			<li class="dropdown">
-				<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span><?php echo $default;?></span> <span class="caret"></span></a>
+				<a href="#" class="dropdown-toggle" data-toggle="dropdown">User <span class="caret"></span></a>
 				<ul class="dropdown-menu" role="menu">
 					<li><a href="#">Create New User</a></li>
 					<li><a href="logout.php">Log Out</a></li>
@@ -88,22 +70,53 @@ $InvoiceNumber = $_GET['InvoiceNumber'];
 </nav>
 
 <div class="container">
-		<form action="" method="post">
-			<div class="form-row"><H1>Edit Sales Record</H1></div>
-	<div class="form-row">
-				<label for="staffno">Staff Number</label>
-				<input type="number" class="form-control" name="staffno" id="staffno" />
-			</div>
-			<div class="form-row">
-				<label for="saledate">Date of Sale</label>
-				<input type="date" class="form-control" placeholder="YYYY-MM-DD" name="saledate" id="saledate" />
-			</div>
+		<form name = "form" action="" method="post">
+			<div class="form-row"><H1>Edit Product Item</H1></div>
+			<?php
+			$status = "";
+			
+			if(isset($_POST['new']) && $_POST['new']==1) {
 
+			
+				$itemid =$_REQUEST['itemid'];
+				$category =$_REQUEST['category'];
+				$brand =$_REQUEST['brand'];
+				$itemname =$_REQUEST['itemname'];
+				$qty =$_REQUEST['qty'];
+				$price =$_REQUEST['price'];
+				$update="UPDATE Items SET ItemID='".$itemid."', CategoryID='".$category."', Brand='".$brand."', ItemName='".$itemname."', Qty='".$qty."', Price='".$price."' where ItemID='".$ItemID."'";
+
+			mysqli_query($conn, $update) or die(mysqli_error());
+
+			$status = "Record Updated Successfully. </br></br><a href='viewstock.php'>Back to view stock page</a>";
+			echo '<p style="color:#FF0000;">'.$status.'</p>';
+			}
+			else {
+            ?>
+	<div class="form-row">
+			    <input type="hidden" name="new" value="1" />
+				<label for="itemid">Item ID</label>
+				<input name="itemid" type="text" value="<?php echo $row['ItemID'];?>" />
+			</div>
 			<div class="form-row">
-				<label for="totalprice">Total Price</label>
-				<div class="input-group">
-					<input type="number" min="1" step="any" class="form-control" name="totalprice" id="totalprice" />
-				</div>
+				<label for="category">Category</label>
+				<input type="text" name="category" placeholder="Enter Category" required value="<?php echo $row['CategoryID'];?>" />
+			</div>
+			<div class="form-row">
+				<label for="brand">Brand</label>
+				<input type="text" name="brand" placeholder="Enter Brand" required value="<?php echo $row['Brand'];?>" />
+			</div>
+			<div class="form-row">
+				<label for="itemname">Item Name</label>
+				<input type="text" name="itemname" placeholder="Enter Item Name" required value="<?php echo $row['ItemName'];?>" />
+			</div>
+			<div class="form-row">
+				<label for="qty">Qty</label>
+				<input type="text" name="qty" placeholder="Enter Qty" required value="<?php echo $row['Qty'];?>" />
+			</div>
+			<div class="form-row">
+				<label for="price">Price</label>
+				<input type="text" name="price" placeholder="Enter Price" required value="<?php echo $row['Price'];?>" />
 			</div>
 			<br/>
 			<div class="form-row">
@@ -114,32 +127,10 @@ $InvoiceNumber = $_GET['InvoiceNumber'];
 	<script src="js/jquery.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/angular.min.js"></script>
-</body>
-<?php
+	<?php
+}
 
-
-include 'connection.php';
-
-	connection();
-
-
-	if(!empty($staffno) && !empty($saledate) && !empty($totalprice)) {
-
-
-			//SQL statement to insert new record of user
-			$sql = "UPDATE Sales SET SalesDate = '$saledate', StaffNo = '$staffno', TotalPrice='$totalprice' WHERE InvoiceNumber = $InvoiceNumber";
-
-
-
-			if($conn->query($sql) === TRUE){
-			 echo "Sales Record successfully updated.";
-			}
-			else {
-				echo "ERROR: Could not execute update." . $conn->error;
-			}
-
-	$conn->close();
-		}
-	// }
 ?>
+</body>
+
 </html>
