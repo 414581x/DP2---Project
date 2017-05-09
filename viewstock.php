@@ -2,7 +2,7 @@
 
 <html XMLns="http://www.w3.org/1999/xHTML">
 <head>
-	<title>Add Sales Recors</title>
+	<title>View Stock Details</title>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 	<link href="css/bootstrap.min.css" rel="stylesheet" />
@@ -18,16 +18,14 @@
   $datatable = "Items"; // MySQL table name
   $results_per_page = 20; // number of results per page
  
-
   // Create connection
   $conn = new mysqli($servername, $username, $password, $dbname);
   // Check connection
  	if ($conn === false) {
     die("Connection failed: " . $conn->connect_error);}
-
 if (isset($_GET["page"])) { $page  = $_GET["page"]; } else { $page=1; };
 $start_from = ($page-1) * $results_per_page;
-$sql = "SELECT ItemID, CategoryDescription, Brand, ItemName, Qty, Price FROM ".$datatable.", Category WHERE Items.CategoryID = Category.CategoryID ORDER BY Brand ASC LIMIT $start_from, ".$results_per_page;
+$sql = "SELECT ItemID, CategoryDescription, ItemName, Qty, Price FROM ".$datatable.", Category WHERE Items.CategoryID = Category.CategoryID ORDER BY ItemName ASC LIMIT $start_from, ".$results_per_page;
 		
 		$rs_result = $conn->query($sql);
 ?> 
@@ -83,14 +81,13 @@ $sql = "SELECT ItemID, CategoryDescription, Brand, ItemName, Qty, Price FROM ".$
 <table border="1" cellpadding="4">
 <tr>
     <td bgcolor="#CCCCCC"><strong>ItemID</strong></td>
-    <td bgcolor="#CCCCCC"><strong>Category</strong></td><td bgcolor="#CCCCCC"><strong>Brand</strong></td><td bgcolor="#CCCCCC"><strong>Name</strong></td><td bgcolor="#CCCCCC"><strong>Qty</strong></td><td bgcolor="#CCCCCC"><strong>Price</strong></td><td bgcolor="#CCCCCC"><strong>Options</strong></td></tr>
+    <td bgcolor="#CCCCCC"><strong>Category</strong></td><td bgcolor="#CCCCCC"><strong>Name</strong></td><td bgcolor="#CCCCCC"><strong>Qty</strong></td><td bgcolor="#CCCCCC"><strong>Price</strong></td><td bgcolor="#CCCCCC"><strong>Options</strong></td></tr>
 <?php 
  while($row = $rs_result->fetch_assoc()) {
 ?> 
             <tr>
             <td><? echo $row["ItemID"]; ?></td>
             <td><? echo $row["CategoryDescription"]; ?></td>
-            <td><? echo $row["Brand"]; ?></td>
             <td><? echo $row["ItemName"]; ?></td>
             <td><? echo $row["Qty"]; ?></td>
             <td><? echo $row["Price"]; ?></td>
@@ -124,15 +121,13 @@ $row = $result->fetch_assoc();
 $total_pages = ceil($row["total"] / $results_per_page); // calculate total pages with results
   
 for ($i=1; $i<=$total_pages; $i++) {  // print links for all pages
-            echo "<a href='viewstock2.php?page=".$i."'";
+            echo "<a href='viewstock.php?page=".$i."'";
             if ($i==$page)  echo " class='curPage'";
             echo ">".$i."</a> "; 
 }; 
 ?>
 </body>
 <?php 
-
  
-
 ?>
 </html>
