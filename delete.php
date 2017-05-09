@@ -25,5 +25,5 @@
   //close conneciton
   mysqli_close($conn);
   //redirect to viewsales.php page
-  header("Location: viewstock2.php");
+  header("Location: viewstock.php");
 ?> 

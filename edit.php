@@ -80,11 +80,11 @@ $ItemID = $_GET['ItemID'];
 			
 				$itemid =$_REQUEST['itemid'];
 				$category =$_REQUEST['category'];
-				$brand =$_REQUEST['brand'];
+			
 				$itemname =$_REQUEST['itemname'];
 				$qty =$_REQUEST['qty'];
 				$price =$_REQUEST['price'];
-				$update="UPDATE Items SET ItemID='".$itemid."', CategoryID='".$category."', Brand='".$brand."', ItemName='".$itemname."', Qty='".$qty."', Price='".$price."' where ItemID='".$ItemID."'";
+				$update="UPDATE Items SET ItemID='".$itemid."', CategoryID='".$category."', ItemName='".$itemname."', Qty='".$qty."', Price='".$price."' where ItemID='".$ItemID."'";
 
 			mysqli_query($conn, $update) or die(mysqli_error());
 
@@ -101,10 +101,6 @@ $ItemID = $_GET['ItemID'];
 			<div class="form-row">
 				<label for="category">Category</label>
 				<input type="text" name="category" placeholder="Enter Category" required value="<?php echo $row['CategoryID'];?>" />
-			</div>
-			<div class="form-row">
-				<label for="brand">Brand</label>
-				<input type="text" name="brand" placeholder="Enter Brand" required value="<?php echo $row['Brand'];?>" />
 			</div>
 			<div class="form-row">
 				<label for="itemname">Item Name</label>
