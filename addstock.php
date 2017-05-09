@@ -5,7 +5,7 @@
 	<title>Add Stock item</title>
 	<SCRIPT language="javascript">
 
-		
+
 		function addRow(tableID) {
 
 			var table = document.getElementById(tableID);
@@ -52,8 +52,6 @@
 					rowCount--;
 					i--;
 				}
-
-
 			}
 			}catch(e) {
 				alert(e);
@@ -68,7 +66,11 @@
 </head>
 <body>
 
-<?php 
+<?php
+	// to use the logged in username apper in other places
+	session_start();
+	$default = "";
+	$default = $_SESSION['$login_user'];
 
   // define variables and set to empty values
   $nameErr = $brandErr = $qtyErr = $priceErr = $itemideErr = "";
@@ -76,7 +78,7 @@
 
   if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     //statement to see if name field is empty. If it is, populate error variable. If not, put data into name variable
-    
+
 
     if (empty($_POST['itemid'])) {
     $itemideErr = "Item ID is required";
@@ -112,17 +114,11 @@
   } else {
      $price = isset($_POST['price']) ? $_POST['price'] : "";
   }
-
-
-
 }
-
-
 ?>
 
-
 <nav class="navbar navbar-default" role="navigation">
-<div class="container-fluid">
+	<div class="container-fluid">
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
 				<span class="sr-only">Toggle navigation</span>
@@ -132,31 +128,37 @@
 			</button>
 			<a class="navbar-brand" href="cover.html">PHP Inc.</a>
 		</div>
-	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-		<ul class="nav navbar-nav">
-			<li class="dropdown active">
-				<a href="#" class="dropdown-toggle" data-toggle="dropdown">SALES <span class="caret"></span></a>
-				<ul class="dropdown-menu" role="menu">
-					<li><a href="addsales.php">ADD SALES</a></li>
-					<li><a href="edit.php">EDIT SALES</a></li>
-					<li><a href="viewsales.php">DISPLAY SALES</a></li>
-				</ul>
-			</li>
-			<li><a href="#">GOODS RECEIVED</a></li>
-			<li><a href="#">REPORTING</a></li>
-			<li><a href="#">SALES</a></li>
-		</ul>
-		<ul class="nav navbar-nav navbar-right">
-			<li class="dropdown">
-				<a href="#" class="dropdown-toggle" data-toggle="dropdown">User <span class="caret"></span></a>
-				<ul class="dropdown-menu" role="menu">
-					<li><a href="#">Create New User</a></li>
-					<li><a href="logout.php">Log Out</a></li>
-				</ul>
-			</li>
-		</ul>
-	</div><!-- /.navbar-collapse -->
-</div><!-- /.container-fluid -->
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			<ul class="nav navbar-nav">
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown">SALES <span class="caret"></span></a>
+					<ul class="dropdown-menu" role="menu">
+						<li><a href="addsales.php">ADD SALES</a></li>
+						<li><a href="edit.php">EDIT SALES</a></li>
+						<li><a href="viewsales.php">DISPLAY SALES</a></li>
+					</ul>
+				</li>
+				<li class="dropdown active">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown">STOCK <span class="caret"></span></a>
+					<ul class="dropdown-menu" role="menu">
+						<li><a href="addstock.php">ADD STOCK ITEM</a></li>
+						<li><a href="#">STOCK COUNT</a></li>
+					</ul>
+				</li>
+				<li><a href="#">REPORTING</a></li>
+				<li><a href="#">PREDICTION</a></li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span><?php echo $default; ?></span> <span class="caret"></span></a>
+					<ul class="dropdown-menu" role="menu">
+						<li><a href="register.php">Create New User</a></li>
+						<li><a href="logout.php">Log Out</a></li>
+					</ul>
+				</li>
+			</ul>
+		</div><!-- /.navbar-collapse -->
+	</div><!-- /.container-fluid -->
 </nav>
 
 <div class="container">
@@ -186,19 +188,19 @@
 							<TD><label>Name</label><INPUT type="text" name="name[]"/></TD>
 							<TD ><label>Qty</label><INPUT type="number" size="5" name="qty[]"/></TD>
 							<TD ><label>Price</label><INPUT type="text" name="price[]"/></TD>
-							
-							
+
+
 						</TR>
 						</p>
 					</TABLE>
 			</div>
-			
+
 			</div>
 			<br/>
 			<div class="form-row">
 				<button type="submit" class="btn btn-primary">Submit</button>
 			</div>
-			
+
 		</form>
 </div><!-- /.form-container -->
 	<script src="js/jquery.min.js"></script>
@@ -209,7 +211,7 @@
 
   //connection();
   //SQl query to check if user already exists
-     $servername = "localhost";
+  $servername = "localhost";
   $username = "dp2";
   $password = "phpdp2";
   $dbname = "dp2php";
@@ -229,12 +231,12 @@
   }
   else {
   if(!empty($name) && !empty($price) && !empty($qty)) {
- 
+
   foreach($itemid as $a => $b) {
       //SQL statement to insert new record of user
       $sql = "INSERT INTO Items (ItemID, CategoryID, Brand, ItemName, Qty, Price)
       VALUES ($itemid[$a], $category[$a], '$brand[$a]', '$name[$a]', $qty[$a], $price[$a])";
-  
+
 
       if($conn->query($sql) === TRUE){
        echo "Product successfully added.";
@@ -248,5 +250,4 @@
   }
 ?>
 </body>
-
 </html>
