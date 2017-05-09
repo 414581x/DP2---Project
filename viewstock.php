@@ -27,7 +27,7 @@
 
 if (isset($_GET["page"])) { $page  = $_GET["page"]; } else { $page=1; };
 $start_from = ($page-1) * $results_per_page;
-$sql = "SELECT * FROM ".$datatable." ORDER BY Brand ASC LIMIT $start_from, ".$results_per_page;
+$sql = "SELECT ItemID, CategoryDescription, Brand, ItemName, Qty, Price FROM ".$datatable.", Category WHERE Items.CategoryID = Category.CategoryID ORDER BY Brand ASC LIMIT $start_from, ".$results_per_page;
 		
 		$rs_result = $conn->query($sql);
 ?> 
@@ -89,7 +89,7 @@ $sql = "SELECT * FROM ".$datatable." ORDER BY Brand ASC LIMIT $start_from, ".$re
 ?> 
             <tr>
             <td><? echo $row["ItemID"]; ?></td>
-            <td><? echo $row["CategoryID"]; ?></td>
+            <td><? echo $row["CategoryDescription"]; ?></td>
             <td><? echo $row["Brand"]; ?></td>
             <td><? echo $row["ItemName"]; ?></td>
             <td><? echo $row["Qty"]; ?></td>
