@@ -1,63 +1,113 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 
-<html XMLns="http://www.w3.org/1999/xHTML">
+<html XMLns="http://www.w3.org/1999/xHTML" lang="en" data-ng-app="App">
 <head>
-	<title>Add Sales Recors</title>
+<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+        <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/angular.min.js"></script>
+    <!-- client side validation -->
+    <script src="js/validation.js"></script>
+
+	<title>Add Sales Records</title>
+
+	<SCRIPT language="javascript" >
+
+
+		function SetDate()
+		{
+			var date = new Date();
+
+			var day = date.getDate();
+			var month = date.getMonth() + 1;
+			var year = date.getFullYear();
+
+			if (month < 10) month = "0" + month;
+			if (day < 10) day = "0" + day;
+
+			var today = year + "-" + month + "-" + day;
+
+
+			document.getElementById('currentdate').value = today;
+		}
+
+
+
+
+ $(document).ready(function(){
+        $(".add-row").click(function(){
+            var itemname = $("#itemname").val();
+            var price = $("#price").val();
+            var qty = $("#qty").val();
+            var total = $("#total").val();
+            var markup = "<tr><td><input type='checkbox' name='record'></td><td><input type='text' name='itemarray[]' value='" + itemname + "'/></td><td><input type='text' name='pricearray[]' value='" + price + "'/></td><td><input type='text' name='qtyarray[]' value='" + qty + "' /></td><td><input type='text' name='totalarray[]' class='tp1' value='" + total + "'/></td></tr>";
+            $("table tbody").append(markup);
+
+                var sum = 0;
+    $(".tp1").each(function(){
+        sum += +$(this).val();
+    });
+    $(".totalprice").val(sum)
+
+        });
+        
+        // Find and remove selected table rows
+        $(".delete-row").click(function(){
+            $("table tbody").find('input[name="record"]').each(function(){
+                if($(this).is(":checked")){
+                    $(this).parents("tr").remove();
+                }
+            });
+        });
+    });    
+
+
+$(document).ready(function() {
+            $('#itemname').on('change', function () {
+                $('#price').val($(this[this.selectedIndex]).attr('data-price'));
+            });
+        })
+
+//$(document).on("change", ".tp1", function() {
+
+    //var sum = 0;
+    //$(".tp1").each(function(){
+    //    sum += +$(this).val();
+    //});
+    //$(".totalprice").val(sum);
+//});
+
+
+function sum() {
+            var txtFirstNumberValue = document.getElementById('price').value;
+            var txtSecondNumberValue = document.getElementById('qty').value;
+            var result = parseFloat(txtFirstNumberValue) * parseFloat(txtSecondNumberValue);
+            if (!isNaN(result)) {
+                document.getElementById('total').value = result;
+            }
+        }
+
+
+
+	</SCRIPT>
+
+
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 	<link href="css/bootstrap.min.css" rel="stylesheet" />
 	<link href="css/add-sales.css" rel="stylesheet" />
+	<link href="css/interfacecolorset.css" rel="stylesheet" />
 </head>
-<body>
+<body data-ng-controller="myCtrl" onload="SetDate();">
 
-<?php 
+<?php
 session_start();
-include 'validation.php';
 $default = "";
 $default = $_SESSION['$login_user'];
-
-
-
-  // define variables and set to empty values
-  $totalpriceErr = $saledateErr = "";
-  $staffno = $saledate = $totalprice = "";
-
-  if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    //statement to see if name field is empty. If it is, populate error variable. If not, put data into name variable
-  
-      //$inum = isset($_POST['inum']) ? $_POST['inum'] : "";
-  
-
-  //statement to see if password field is empty. If it is, populate error variable. If not, put data into password variable
-
-     $staffno = isset($_POST['staffno']) ? $_POST['staffno'] : "";
-  
-
-  //statement to see if saledate confirmation field is empty. If it is, populate error variable. If not, put data into saledate variable after passing it to the validation function
- if (empty($_POST['saledate'])) {
-      $saledateErr = "Sale Date is required";
-    } else {
-    	$saledate = validate($_POST['saledate']);
-  }
-     
-  
-
-  //statement to see if total price field is empty. If it is, populate error variable. If not, put data into email variable after passing it to the validation function
- if (empty($_POST['totalprice'])) {
-      $totalpriceErr = "Total Price is required";
-    } else {
-  		$totalprice = validate($_POST['totalprice']);
-  }
-     
-  
-
-
-}
 ?>
 
-
 <nav class="navbar navbar-default" role="navigation">
-<div class="container-fluid">
+	<div class="container-fluid">
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
 				<span class="sr-only">Toggle navigation</span>
@@ -67,85 +117,167 @@ $default = $_SESSION['$login_user'];
 			</button>
 			<a class="navbar-brand" href="cover.html">PHP Inc.</a>
 		</div>
-	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-		<ul class="nav navbar-nav">
-			<li class="dropdown active">
-				<a href="#" class="dropdown-toggle" data-toggle="dropdown">SALES <span class="caret"></span></a>
-				<ul class="dropdown-menu" role="menu">
-					<li><a href="addsales.php">ADD SALES</a></li>
-					<li><a href="edit.php">EDIT SALES</a></li>
-					<li><a href="viewsales.php">DISPLAY SALES</a></li>
-				</ul>
-			</li>
-			<li><a href="#">GOODS RECEIVED</a></li>
-			<li><a href="#">REPORTING</a></li>
-			<li><a href="#">SALES</a></li>
-		</ul>
-		<ul class="nav navbar-nav navbar-right">
-			<li class="dropdown">
-				<a href="#" class="dropdown-toggle" data-toggle="dropdown">User <span class="caret"></span></a>
-				<ul class="dropdown-menu" role="menu">
-					<li><a href="#">Create New User</a></li>
-					<li><a href="logout.php">Log Out</a></li>
-				</ul>
-			</li>
-		</ul>
-	</div><!-- /.navbar-collapse -->
-</div><!-- /.container-fluid -->
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			<ul class="nav navbar-nav">
+				<li class="dropdown active">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown">SALES <span class="caret"></span></a>
+					<ul class="dropdown-menu" role="menu">
+						<li><a href="addsales.php">ADD SALES</a></li>
+						<li><a href="edit.php">EDIT SALES</a></li>
+						<li><a href="viewsales.php">DISPLAY SALES</a></li>
+					</ul>
+				</li>
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown">STOCK <span class="caret"></span></a>
+					<ul class="dropdown-menu" role="menu">
+						<li><a href="addstock.php">ADD STOCK ITEM</a></li>
+						<li><a href="#">STOCK COUNT</a></li>
+					</ul>
+				</li>
+				<li><a href="#">REPORTING</a></li>
+				<li><a href="#">PREDICTION</a></li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span><?php echo $default; ?></span> <span class="caret"></span></a>
+					<ul class="dropdown-menu" role="menu">
+						<li><a href="register.php">Create New User</a></li>
+						<li><a href="logout.php">Log Out</a></li>
+					</ul>
+				</li>
+			</ul>
+		</div><!-- /.navbar-collapse -->
+	</div><!-- /.container-fluid -->
 </nav>
 
 <div class="container">
-		<form action="" method="post">
-			<div class="form-row"><H1>Add Sales Record</H1></div>
-	<div class="form-row">
-				<label for="staffno">Staff Number</label>
-				<input type="number" class="form-control" name="staffno" id="staffno" value="<?php echo $default; ?>"/>
+	<form action="getresults.php" method="post" name="myForm">
+		<div class="row">
+			<div class="col-xs-12">
+				<H1 class="text-center">Add Sales Records</H1>
 			</div>
-			<div class="form-row">
-				<label for="saledate">Date of Sale</label>
-				<input type="date" class="form-control" placeholder="YYYY-MM-DD" name="saledate" id="saledate" /><span class="error"><?php echo $saledateErr;?></span>
-			</div>
-			
-			<div class="form-row">
-				<label for="totalprice">Total Price</label>
-				<div class="input-group">
-					<input type="number" min="1" step="any" class="form-control" name="totalprice" id="totalprice" /><span class="error"><?php echo $totalpriceErr;?></span>
+			 <form action="getresults.php" method="post" name="myForm">
+			<div class="col-xs-6">
+				<div class="form-row">
+					<label for="RetailPrice">Total Price</label>
+					<div class="input-group">
+						<input type="text" class="totalprice" name="totalprice" id="totalprice" /><span class="error"><?php echo $totalpriceErr;?></span>
+					</div>
 				</div>
 			</div>
-			<br/>
-			<div class="form-row">
-				<button type="submit" class="btn btn-primary">Submit</button>
+			<div class="col-xs-6">
+				<div class="form-row">
+						<label for="staffno">Staff ID</label>
+						<input type="text" class="form-control" name="staffno" id="staffno" value="<?php echo $default; ?>"/>
+				</div>
+				<div class="form-row">
+					<label for="saledate">Date of Sale</label>
+					<input type="text" class="form-control" name="currentdate" id="currentdate" />
+				</div>
 			</div>
-		</form>
+			<br /><br /><br />
+			<div class="col-xs-12">
+					 <label>Item name</label>
+                            <select name = "itemname" id="itemname">
+                            <option value=''>Item Name</option>
+                                 <?php
+                                                 
+                                                include "connection.php"; // Database connection using PDO
+                                                $sql="SELECT ItemID, Price, ItemName FROM Items order by ItemName";
+                                    
+                                                foreach ($conn->query($sql) as $row){//Array or records stored in $row
+                                                echo "<option value=$row[ItemID] data-price=$row[Price]>$row[ItemName]</option>";
+                                                /* Option values are added by looping through the array */
+                                                }
+                                                 echo "</select>";// Closing of list box
+                                        ?>
+        <label>Price</label><input type="text" name="price" id="price" placeholder="Price" onkeyup="sum();">
+        <label>Qty</label><input type="text" name="qty" id="qty" placeholder="Qty" onkeyup="sum();">
+        <label>Total</label><input type="text" name = "total" id="total" placeholder="Total">
+        <input type="button" class="add-row" value="Add Row">
+       
+    <table>
+        <thead>
+            <tr>
+                <th>Select</th>
+                <th>Item Name</th>
+                <th>Price</th>
+                <th>Qty</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+    
+     
+    <button type="button" class="delete-row">Delete Row</button>
+			<div class="col-xs-12">
+				<div class="form-row">
+					<button type="submit" class="btn btn-primary" name="submit">Submit</button>
+				</div>
+				</form>
+			</div>
+		</div>
+	</form>
 </div><!-- /.form-container -->
 	<script src="js/jquery.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/angular.min.js"></script>
+	<!-- client side validation -->
+	<script src="js/validation.js"></script>
+
+
+
+<script>
+
+		    $('#itemname').on('change', function () {
+		        $('#price').val($(this[this.selectedIndex]).attr('data-price'));
+		    });
+	
+function addRow(tableID) {
+
+			var table = document.getElementById(tableID);
+
+			var rowCount = table.rows.length;
+			var row = table.insertRow(rowCount);
+
+			var colCount = table.rows[0].cells.length;
+
+			for(var i=0; i<colCount; i++) {
+
+				var newcell	= row.insertCell(i);
+
+				newcell.innerHTML = table.rows[0].cells[i].innerHTML;
+				//alert(newcell.childNodes);
+
+			
+
+				switch(newcell.childNodes[0].type) {
+					case "text":
+							newcell.childNodes[0].value = "";
+							break;
+					case "checkbox":
+							newcell.childNodes[0].checked = false;
+							break;
+					case "select-one":
+							newcell.childNodes[0].selectedIndex = 0;
+							break;
+			
+				}
+			}
+		}
+
+</script>
+
+	
 </body>
-<?php
 
-  include 'connection.php';
-
-  connection();
-
-
-  if(!empty($staffno) && !empty($saledate) && !empty($totalprice)) {
-  
-  
-      //SQL statement to insert new record of user
-      $sql = "INSERT INTO Sales (SalesDate, StaffNo, TotalPrice)
-      VALUES ('$saledate', $staffno, $totalprice)";
-  
-
-      if($conn->query($sql) === TRUE){
-       echo "Sales Record successfully added.";
-      }
-      else {
-        echo "ERROR: Could not execute insert." . $conn->error;
-      }
- 
-  $conn->close();
-    }
-  // }
-?>
 </html>
