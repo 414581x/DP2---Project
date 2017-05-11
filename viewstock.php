@@ -7,6 +7,24 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 	<link href="css/bootstrap.min.css" rel="stylesheet" />
 	<link href="css/add-sales.css" rel="stylesheet" />
+	<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+	<script type="text/javascript" src="jquery-1.4.2.min.js"></script>
+	    <script src="js/jquery.min.js"></script>
+	    <script src="js/bootstrap.min.js"></script>
+	    <script src="js/angular.min.js"></script>
+	    <script src="js/validation.js"></script>
+
+
+
+	<SCRIPT language="javascript" >
+		
+		 $(function () {
+    		$("#viewtable tbody tr td.qty").filter(function () {
+    		return $(this).text() < 20;
+			}).parent().addClass('highlite');
+    	});
+
+	</SCRIPT>
 </head>
 <body>
 
@@ -31,7 +49,7 @@
 	$sql = "SELECT ItemID, CategoryDescription, ItemName, Qty, Price
 					FROM ".$datatable.", Category
 					WHERE Items.CategoryID = Category.CategoryID
-					ORDER BY ItemID ASC LIMIT $start_from, ".$results_per_page;
+					ORDER BY Qty ASC LIMIT $start_from, ".$results_per_page;
 
 	$rs_result = $conn->query($sql);
 
@@ -94,7 +112,7 @@
 		</div>
 		<div class="col-xs-12">
 			<div class="table-responsive">
-				<table class="table table-hover">
+				<table class="table table-hover"" id="viewtable" >
 					<thead class="thead-default">
 						<tr>
 		  				<th>ItemID</th>
@@ -111,7 +129,7 @@
 					    <td><? echo $row["ItemID"]; ?></td>
 					    <td><? echo $row["CategoryDescription"]; ?></td>
 					    <td><? echo $row["ItemName"]; ?></td>
-					    <td><? echo $row["Qty"]; ?></td>
+					    <td class="qty"><? echo $row["Qty"]; ?></td>
 					    <td><? echo $row["Price"]; ?></td>
 					    <td><? echo "<a href= 'edit.php?ItemID=$row[ItemID]'>Edit </a><a href= 'delete.php?ItemID=$row[ItemID]'>Delete</a>"; ?></td>
 					  </tr>
