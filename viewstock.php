@@ -136,17 +136,9 @@
 					<?php }; ?>
 					</tbody>
 				</table>
-			</div><!-- /.table -->
-		</div>
-	</div><!-- /.container -->
-
-	<script src="js/jquery.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-	<script src="js/angular.min.js"></script>
-
-	<?php
-		$sql = "SELECT COUNT(ItemID) AS total FROM ".$datatable;
-		$result = $conn->query($sql);
+				<?php
+		$navsql = "SELECT COUNT(ItemID) AS total FROM ".$datatable;
+		$result = $conn->query($navsql);
 		$row = $result->fetch_assoc();
 		$total_pages = ceil($row["total"] / $results_per_page); // calculate total pages with results
 
@@ -156,5 +148,14 @@
             echo ">".$i."</a> ";
 		};
 	?>
+			</div><!-- /.table -->
+		</div>
+	</div><!-- /.container -->
+
+	<script src="js/jquery.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/angular.min.js"></script>
+
+	
 </body>
 </html>
