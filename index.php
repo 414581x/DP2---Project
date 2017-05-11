@@ -11,26 +11,26 @@
 <body>
 <?php
 //if SESSION is set as $login_user variable and pass it to request.php
-if(isset($_SESSION['$login_user'])){
-header("location: addsales.php");
-}
-// define variables and set to empty values
-$staffnoErr = $passwordErr = "";
-$LoginNumber = $LoginPassword = "";
-if ($_SERVER['REQUEST_METHOD'] === 'POST')
-{
-	if (empty($_POST['staffno'])) {
-		$staffnoErr = "Staff Number is required";
-	} else {
-		$LoginNumber=isset($_POST['staffno']) ? $_POST['staffno'] : "";
+	if(isset($_SESSION['$login_user'])){
+	header("location: addsales.php");
 	}
-	//statement to see if password field is empty. If it is, populate error variable. If not, put data into password variable
-	if (empty($_POST['lpassword'])) {
-		$passwordErr = "Password is required";
-	} else {
-		 $LoginPassword = isset($_POST['lpassword']) ? $_POST['lpassword'] : "";
+	// define variables and set to empty values
+	$staffnoErr = $passwordErr = "";
+	$LoginNumber = $LoginPassword = "";
+	if ($_SERVER['REQUEST_METHOD'] === 'POST')
+	{
+		if (empty($_POST['staffno'])) {
+			$staffnoErr = "Staff Number is required";
+		} else {
+			$LoginNumber=isset($_POST['staffno']) ? $_POST['staffno'] : "";
+		}
+		//statement to see if password field is empty. If it is, populate error variable. If not, put data into password variable
+		if (empty($_POST['lpassword'])) {
+			$passwordErr = "Password is required";
+		} else {
+			 $LoginPassword = isset($_POST['lpassword']) ? $_POST['lpassword'] : "";
+		}
 	}
-}
 ?>
 
 <div class="jumbotron text-center">
@@ -64,7 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
 	</div>
 </div>
 
-<?php 
+<?php
 //Starting a session
 session_start();
 //if fields are not empty, execute
@@ -78,16 +78,16 @@ if (!empty($LoginNumber) && !empty($LoginPassword))
 	$password = "phpdp2";
 	$dbname = "dp2php";
 
-	
+
   // Create connection
   $conn = mysql_connect($servername, $username, $password);
   $db = mysql_select_db($dbname, $conn);
 
-	
+
 
 	//SQL query to select the correct table row where the customer number and password match
 	//$sql = "SELECT * FROM Staff WHERE StaffID = '$LoginNumber' AND lpassword = '$LoginPassword'" ;
-	
+
 	//if($conn->query($sql) === TRUE){
 	//$_SESSION['$login_user']=$LoginNumber; // Initializing Session
 	//header("location: addsales.php"); // Redirecting to addsales.php
@@ -97,9 +97,9 @@ if (!empty($LoginNumber) && !empty($LoginPassword))
 	  if ($rows == 1) {
 	  $_SESSION['$login_user']=$LoginNumber; // Initializing Session
 	  header("location: addsales.php"); // Redirecting to request.php
-  
+
   }
-	
+
 	else {
 		//If no user is found, show error message
 		echo "Staff Number or Password is invalid";

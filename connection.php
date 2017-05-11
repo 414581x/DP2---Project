@@ -1,7 +1,6 @@
 <?php
+  
 
-//function that connects to the database using correct details  
-function connection(){
 	$servername = "localhost";
 	$username = "dp2";
 	$password = "phpdp2";
@@ -14,6 +13,6 @@ function connection(){
 			die("Connection failed: " . $conn->connect_error);
 		}
 
-	}
+	
 
 ?> 

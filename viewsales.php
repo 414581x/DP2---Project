@@ -11,164 +11,139 @@
 <body>
 
 <?php
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-	// define variables and set to empty values
-	$adate = $amonth = $aday = $ayear = "";
+  $servername = "localhost";
+  $username = "dp2";
+  $password = "phpdp2";
+  $dbname = "dp2php";
+  $datatable = "Items"; // MySQL table name
+  $results_per_page = 20; // number of results per page
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  // Create connection
+  $conn = new mysqli($servername, $username, $password, $dbname);
 
-	//If set, put data into month variable
-	$amonth = $_POST['amonth'];
+	// Check connection
+ 	if ($conn === false) { die("Connection failed: " . $conn->connect_error); }
+	if (isset($_GET["page"])) { $page = $_GET["page"]; }
+	else { $page = 1; };
 
-	//If set, put data into day variable
-	$aday = $_POST['aday'];
+	$start_from = ($page-1) * $results_per_page;
 
-	//If set, put data into year variable
-	$ayear = $_POST['ayear'];
+	$sql = "SELECT ItemID, CategoryDescription, ItemName, Qty, Price
+					FROM ".$datatable.", Category
+					WHERE Items.CategoryID = Category.CategoryID
+					ORDER BY ItemID ASC LIMIT $start_from, ".$results_per_page;
 
-	//Concat 3 variables into 1 variable
-	$adate = $ayear. "-" .$amonth. "-" .$aday;
+	$rs_result = $conn->query($sql);
 
-include 'connection.php';
-
-	connection();
-
-
-
-		$SQLstring = "SELECT InvoiceNumber, SalesDate, StaffNo , TotalPrice FROM Sales where SalesDate = '$adate'";
-
-		$queryResult = @mysqli_query($conn, $SQLstring)
-		Or die ("<p>Unable to query the table.</p>"."<p>Error code ". mysqli_errno($conn). ": ".mysqli_error($conn)). "</p>";
-
-		//Display a table with results
-	echo "<table width='100%' border='1'>";
-	echo "<th>Invoice Number</th><th>Sales Date</th><th>Staff Number</th><th>Total Price</th><th>Options</th>";
-	$row = mysqli_fetch_row($queryResult);
-
-	while ($row) {
-		echo "<tr><td>{$row[0]}</td>";
-		echo "<td>{$row[1]}</td>";
-		echo "<td>{$row[2]}</td>";
-		echo "<td>{$row[3]}</td>";
-		echo "<td><a href= 'edit.php?InvoiceNumber=$row[0]'>Edit </a><a href= 'delete.php?InvoiceNumber=$row[0]'>Delete</a></td></tr>";
-
-		$row = mysqli_fetch_row($queryResult);
-	}
-
-
-
-
-
-	mysqli_close($conn);
-
-}
-}
+	session_start();
+	$default = "";
+	$default = $_SESSION['$login_user'];
 ?>
 
+	<nav class="navbar navbar-default" role="navigation">
+	<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="cover.html">PHP Inc.</a>
+			</div>
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			<ul class="nav navbar-nav">
+				<li class="dropdown active">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown">SALES <span class="caret"></span></a>
+					<ul class="dropdown-menu" role="menu">
+						<li><a href="addsales.php">ADD SALES</a></li>
+						<li><a href="edit.php">EDIT SALES</a></li>
+						<li><a href="viewsales.php">VIEW SALES</a></li>
+					</ul>
+				</li>
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown">STOCK <span class="caret"></span></a>
+					<ul class="dropdown-menu" role="menu">
+						<li><a href="addstock.php">ADD STOCK ITEM</a></li>
+						<li><a href="viewstock.php">VIEW STOCK ITEMS</a></li>
+						<li><a href="editstock.php">EDIT STOCK ITEMS</a></li>
+					</ul>
+				</li>
+				<li><a href="#">REPORTING</a></li>
+				<li><a href="#">PREDICTION</a></li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span><?php echo $default;?></span> <span class="caret"></span></a>
+					<ul class="dropdown-menu" role="menu">
+						<li><a href="#">Create New User</a></li>
+						<li><a href="logout.php">Log Out</a></li>
+					</ul>
+				</li>
+			</ul>
+		</div><!-- /.navbar-collapse -->
+	</div><!-- /.container-fluid -->
+	</nav>
 
-<nav class="navbar navbar-default" role="navigation">
-<div class="container-fluid">
-		<div class="navbar-header">
-			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-				<span class="sr-only">Toggle navigation</span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-			</button>
-			<a class="navbar-brand" href="cover.html">PHP Inc.</a>
-		</div>
-	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-		<ul class="nav navbar-nav">
-			<li class="dropdown active">
-				<a href="#" class="dropdown-toggle" data-toggle="dropdown">SALES <span class="caret"></span></a>
-				<ul class="dropdown-menu" role="menu">
-					<li><a href="addsales.php">ADD SALES</a></li>
-					<li><a href="edit.php">EDIT SALES</a></li>
-					<li><a href="viewsales.php">DISPLAY SALES</a></li>
-				</ul>
-			</li>
-			<li class="dropdown">
-				<a href="#" class="dropdown-toggle" data-toggle="dropdown">STOCK <span class="caret"></span></a>
-				<ul class="dropdown-menu" role="menu">
-					<li><a href="addstock.php">ADD STOCK ITEM</a></li>
-					<li><a href="#">STOCK COUNT</a></li>
-				</ul>
-			</li>
-			<li><a href="#">REPORTING</a></li>
-			<li><a href="#">PREDICTION</a></li>
-		</ul>
-		<ul class="nav navbar-nav navbar-right">
-			<li class="dropdown">
-				<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span><?php echo $default;?></span> <span class="caret"></span></a>
-				<ul class="dropdown-menu" role="menu">
-					<li><a href="#">Create New User</a></li>
-					<li><a href="logout.php">Log Out</a></li>
-				</ul>
-			</li>
-		</ul>
-	</div><!-- /.navbar-collapse -->
-</div><!-- /.container-fluid -->
-</nav>
-
-<div class="container">
+	<div class="container">
 		<form action="" method="post">
-			<div class="form-row"><H1>View Sales Records</H1></div>
-	<div class="form-row">
-				<label for="staffno">Day</label>
-				<select name="aday" value=''><option>Day</option>
-	<?php for ($i = 1; $i <= 31; $i++) : ?>
-		<option value="<?php echo $i; ?>"><?php echo $i; ?></option>
-		<?php endfor; ?></select>
-
+		<div class="row">
+			<div class="col-xs-12">
+				<h1 class="text-center">View Sales Records</h1><hr>
 			</div>
-			<div class="form-row">
-				<label for="saledate">Month</label>
-				<select name="amonth" value=''><option>Month</option>
-	<option value='01'>January</option>
-	<option value='02'>February</option>
-	<option value='03'>March</option>
-	<option value='04'>April</option>
-	<option value='05'>May</option>
-	<option value='06'>June</option>
-	<option value='07'>July</option>
-	<option value='08'>August</option>
-	<option value='09'>September</option>
-	<option value='10'>October</option>
-	<option value='11'>November</option>
-	<option value='12'>December</option>
-	</select>
-			</div>
+		</div>
+		<div class="col-xs-12">
+			<div class="table-responsive">
+				<table class="table table-hover">
+					<thead class="thead-default">
+						<tr>
+		  				<th>ItemID</th>
+		  				<th>Category</th>
+							<th>Name</th>
+							<th>Qty</th>
+							<th>Price</th>
+							<th>Options</th>
+						</tr>
+					</thead>
+					<tbody>
+					<?php while($row = $rs_result->fetch_assoc()) { ?>
+					  <tr>
+					    <td><? echo $row["ItemID"]; ?></td>
+					    <td><? echo $row["CategoryDescription"]; ?></td>
+					    <td><? echo $row["ItemName"]; ?></td>
+					    <td><? echo $row["Qty"]; ?></td>
+					    <td><? echo $row["Price"]; ?></td>
+					    <td><? echo "<a href= 'edit.php?ItemID=$row[ItemID]'>Edit </a><a href= 'delete.php?ItemID=$row[ItemID]'>Delete</a>"; ?></td>
+					  </tr>
+					<?php }; ?>
+					</tbody>
+				</table>
+			</div><!-- /.table -->
+		</div>
+		<div class="col-xs-9">
+		</div>
+		<div class="col-xs-3">
+		<form method="get" action="csv.php">
+			<button type="submit" class="btn btn-success">Export as CSV</button>
+		</form><!-- /.export as CSV button -->
+		</div>
+	</div><!-- /.container -->
 
-			<div class="form-row">
-				<label for="totalprice">Year</label>
-				<div class="input-group">
-					<select name="ayear">
-	<option value="2017">2017</option>
-	<option value="2018">2018</option>
-	</select>
-				</div>
-				<div class="form-row">
-				Select Date Item for Retrieve: <input type="radio" name="rdate" value="rdate">Request Date &nbsp; <input type="radio" name="pdate" value="pdate">Pick-up Date <br/>
-				</div
-			</div>
-			<br/>
-			<div class="form-row">
-				<button type="submit" class="btn btn-primary">Submit</button>
-			</div>
-
-		</form>
-<form method="get" action="csv.php">
-		<p>Export as CSV:<input id="submit" type="submit" value="Export"/></p>
-	</form>
-
-</div><!-- /.form-container -->
 	<script src="js/jquery.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/angular.min.js"></script>
+
+	<?php
+		$sql = "SELECT COUNT(ItemID) AS total FROM ".$datatable;
+		$result = $conn->query($sql);
+		$row = $result->fetch_assoc();
+		$total_pages = ceil($row["total"] / $results_per_page); // calculate total pages with results
+
+		for ($i=1; $i<=$total_pages; $i++) {  // print links for all pages
+            echo "<a href='viewstock.php?page=".$i."'";
+            if ($i==$page)  echo " class='curPage'";
+            echo ">".$i."</a> ";
+		};
+	?>
 </body>
-<?php
-
-
-
-?>
 </html>

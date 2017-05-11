@@ -3,8 +3,11 @@
 <html XMLns="http://www.w3.org/1999/xHTML">
 <head>
 	<title>Add Stock item</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<link href="css/bootstrap.min.css" rel="stylesheet" />
+	<link href="css/add-sales.css" rel="stylesheet" />
 	<SCRIPT language="javascript">
-
 
 		function addRow(tableID) {
 
@@ -57,15 +60,9 @@
 				alert(e);
 			}
 		}
-
 	</SCRIPT>
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-	<link href="css/bootstrap.min.css" rel="stylesheet" />
-	<link href="css/add-sales.css" rel="stylesheet" />
 </head>
 <body>
-
 <?php
 	// to use the logged in username apper in other places
 	session_start();
@@ -78,43 +75,34 @@
 
   if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     //statement to see if name field is empty. If it is, populate error variable. If not, put data into name variable
-
-
     if (empty($_POST['itemid'])) {
     $itemideErr = "Item ID is required";
-  } else {
-     $itemid = isset($_POST['itemid']) ? $_POST['itemid'] : "";
-  }
+	  } else {
+	     $itemid = isset($_POST['itemid']) ? $_POST['itemid'] : "";
+	  }
 
-  $category = isset($_POST['category']) ? $_POST['category'] : "";
+	  $category = isset($_POST['category']) ? $_POST['category'] : "";
 
-  if (empty($_POST['name'])) {
-    $pnameErr = "Product Name is required";
-  } else {
-     $name = isset($_POST['name']) ? $_POST['name'] : "";
-  }
+	  if (empty($_POST['name'])) {
+	    $pnameErr = "Product Name is required";
+	  } else {
+	     $name = isset($_POST['name']) ? $_POST['name'] : "";
+	  }
 
-  //statement to see if password field is empty. If it is, populate error variable. If not, put data into password variable
-  if (empty($_POST['brand'])) {
-    $brandErr = "Brand is required";
-  } else {
-     $brand = isset($_POST['brand']) ? $_POST['brand'] : "";
-  }
+	  //statement to see if password confirmation field is empty. If it is, populate error variable. If not, put data into confirmation password variable
+	  if (empty($_POST['qty'])) {
+	    $qtyErr = "Retail Price is required";
+	  } else {
+	     $qty = isset($_POST['qty']) ? $_POST['qty'] : "";
+	  }
 
-  //statement to see if password confirmation field is empty. If it is, populate error variable. If not, put data into confirmation password variable
-  if (empty($_POST['qty'])) {
-    $qtyErr = "Retail Price is required";
-  } else {
-     $qty = isset($_POST['qty']) ? $_POST['qty'] : "";
-  }
-
-  //statement to see if email field is empty. If it is, populate error variable. If not, put data into email variable
-  if (empty($_POST['price'])) {
-    $priceErr = "Stock amount is required";
-  } else {
-     $price = isset($_POST['price']) ? $_POST['price'] : "";
-  }
-}
+	  //statement to see if email field is empty. If it is, populate error variable. If not, put data into email variable
+	  if (empty($_POST['price'])) {
+	    $priceErr = "Stock amount is required";
+	  } else {
+	     $price = isset($_POST['price']) ? $_POST['price'] : "";
+	  }
+	}
 ?>
 
 <nav class="navbar navbar-default" role="navigation">
@@ -135,14 +123,15 @@
 					<ul class="dropdown-menu" role="menu">
 						<li><a href="addsales.php">ADD SALES</a></li>
 						<li><a href="edit.php">EDIT SALES</a></li>
-						<li><a href="viewsales.php">DISPLAY SALES</a></li>
+						<li><a href="viewsales.php">VIEW SALES</a></li>
 					</ul>
 				</li>
 				<li class="dropdown active">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown">STOCK <span class="caret"></span></a>
 					<ul class="dropdown-menu" role="menu">
 						<li><a href="addstock.php">ADD STOCK ITEM</a></li>
-						<li><a href="#">STOCK COUNT</a></li>
+						<li><a href="viewstock.php">VIEW STOCK ITEMS</a></li>
+						<li><a href="editstock.php">EDIT STOCK ITEMS</a></li>
 					</ul>
 				</li>
 				<li><a href="#">REPORTING</a></li>
@@ -162,21 +151,29 @@
 </nav>
 
 <div class="container">
-		<form action="" method="post">
+	<form action="" method="post">
+		<div class="row">
 			<div class="col-xs-12">
 				<H1 class="text-center">Add Stock Items</H1>
 			</div>
+			<div class="col-xs-3"><!-- empty div for spacing --></div>
+			<div class="col-xs-3">
+				<button type="button" class="btn btn-success" onclick="addRow('dataTable')">Add Row</button>
+			</div>
+			<div class="col-xs-3">
+				<button type="button" class="btn btn-danger" onclick="deleteRow('dataTable')">Delete Row</button>
+			</div>
+			<div class="col-xs-3"><!-- empty div for spacing --></div>
+		</div>
+		<div class="row">
 			<div class="col-xs-12">
-			<div class="form-row">
-				<INPUT type="button" value="Add Row" onclick="addRow('dataTable')" /> <INPUT type="button" value="Delete Row" onclick="deleteRow('dataTable')" />
-
-					<TABLE id="dataTable" cellspacing="10">
-					<p>
+				<div class="table" align="center">
+					<table class="table" id="dataTable">
 						<TR>
 							<TD><INPUT type="checkbox" name="chk[]"/></TD>
 							<TD><label>Item ID</label><INPUT type="text" name="itemid[]"/></TD>
 							<TD >
-							<label>Brand</label>
+							<label>Category</label>
 								<SELECT name="category[]">
 								<OPTION value=''>Choose a Category</OPTION>
 									<OPTION value="1">Medicine</OPTION>
@@ -184,25 +181,21 @@
 									<OPTION value="3">Accessories</OPTION>
 								</SELECT>
 							</TD>
-							<TD><label>Brand</label><INPUT type="text" name="brand[]"/></TD>
 							<TD><label>Name</label><INPUT type="text" name="name[]"/></TD>
-							<TD ><label>Qty</label><INPUT type="number" size="5" name="qty[]"/></TD>
-							<TD ><label>Price</label><INPUT type="text" name="price[]"/></TD>
-
-
+							<TD><label>Qty</label><INPUT type="number" size="5" name="qty[]"/></TD>
+							<TD><label>Price</label><INPUT type="text" name="price[]"/></TD>
 						</TR>
-						</p>
-					</TABLE>
+					</table>
+				</div>
 			</div>
-
-			</div>
+		</div>
 			<br/>
-			<div class="form-row">
+			<div class="col-xs-12">
 				<button type="submit" class="btn btn-primary">Submit</button>
 			</div>
-
 		</form>
 </div><!-- /.form-container -->
+
 	<script src="js/jquery.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/angular.min.js"></script>
@@ -211,7 +204,7 @@
 
   //connection();
   //SQl query to check if user already exists
-  $servername = "localhost";
+     $servername = "localhost";
   $username = "dp2";
   $password = "phpdp2";
   $dbname = "dp2php";
@@ -234,8 +227,8 @@
 
   foreach($itemid as $a => $b) {
       //SQL statement to insert new record of user
-      $sql = "INSERT INTO Items (ItemID, CategoryID, Brand, ItemName, Qty, Price)
-      VALUES ($itemid[$a], $category[$a], '$brand[$a]', '$name[$a]', $qty[$a], $price[$a])";
+      $sql = "INSERT INTO Items (ItemID, CategoryID, ItemName, Qty, Price)
+      VALUES ($itemid[$a], $category[$a], '$name[$a]', $qty[$a], $price[$a])";
 
 
       if($conn->query($sql) === TRUE){
@@ -250,4 +243,5 @@
   }
 ?>
 </body>
+
 </html>

@@ -10,14 +10,14 @@
 </head>
 <body>
 
-<?php 
+<?php
 $ItemID = $_GET['ItemID'];
 
  $servername = "localhost";
   $username = "dp2";
   $password = "phpdp2";
   $dbname = "dp2php";
- 
+
 
   // Create connection
   	$conn = new mysqli($servername, $username, $password, $dbname);
@@ -25,11 +25,10 @@ $ItemID = $_GET['ItemID'];
  	if ($conn === false) {
     die("Connection failed: " . $conn->connect_error);}
 
-	$query = "SELECT * from Items where ItemID='".$ItemID."'"; 
+	$query = "SELECT * from Items where ItemID='".$ItemID."'";
 	$result = mysqli_query($conn, $query) or die ( mysqli_error());
 	$row = mysqli_fetch_assoc($result);
 ?>
-
 
 <nav class="navbar navbar-default" role="navigation">
 <div class="container-fluid">
@@ -52,13 +51,19 @@ $ItemID = $_GET['ItemID'];
 					<li><a href="viewsales.php">DISPLAY SALES</a></li>
 				</ul>
 			</li>
-			<li><a href="#">GOODS RECEIVED</a></li>
+			<li class="dropdown">
+				<a href="#" class="dropdown-toggle" data-toggle="dropdown">STOCK <span class="caret"></span></a>
+				<ul class="dropdown-menu" role="menu">
+					<li><a href="addstock.php">ADD STOCK ITEM</a></li>
+					<li><a href="#">STOCK COUNT</a></li>
+				</ul>
+			</li>
 			<li><a href="#">REPORTING</a></li>
-			<li><a href="#">SALES</a></li>
+			<li><a href="#">PREDICTION</a></li>
 		</ul>
 		<ul class="nav navbar-nav navbar-right">
 			<li class="dropdown">
-				<a href="#" class="dropdown-toggle" data-toggle="dropdown">User <span class="caret"></span></a>
+				<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span><?php echo $default;?></span> <span class="caret"></span></a>
 				<ul class="dropdown-menu" role="menu">
 					<li><a href="#">Create New User</a></li>
 					<li><a href="logout.php">Log Out</a></li>
@@ -74,13 +79,13 @@ $ItemID = $_GET['ItemID'];
 			<div class="form-row"><H1>Edit Product Item</H1></div>
 			<?php
 			$status = "";
-			
+
 			if(isset($_POST['new']) && $_POST['new']==1) {
 
-			
+
 				$itemid =$_REQUEST['itemid'];
 				$category =$_REQUEST['category'];
-			
+
 				$itemname =$_REQUEST['itemname'];
 				$qty =$_REQUEST['qty'];
 				$price =$_REQUEST['price'];

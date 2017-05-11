@@ -1,6 +1,9 @@
 <?php
+//Start a session to overwrite current session
 Session_start();
+//Destroy the session
 Session_destroy();
-header("Location: login.php");
+//load indec.php page
+header("Location: index.php");
 
 ?>
