@@ -12,11 +12,9 @@
     session_start();
     $default = "";
     $default = $_SESSION['$register'];
-
     // define variables and set to empty values
     $passwordErr = $firstNameErr = $lastNameErr = $positionErr = $emailErr = "";
     $RegPassword = $RegFirstName = $RegLastName = $RegPosition = $RegEmail = "";
-
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       // Check if Password is empty, if empty set to empty values
       if (empty($_POST['lpassword'])) {
@@ -96,26 +94,29 @@
       </div>
       <br/>
       <div class="form-group">
-        <div class="col-xs-12" id="spacing">
+        <div class="col-xs-6" id="spacing">
+          <a href="index.php" class="btn btn-warning btn-block">Cancel</a>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-xs-6" id="spacing">
          <button type="submit" class="btn btn-primary btn-block" name="createUser">Register</button>
         </div>
       </div>
-    </form>
+     </form>
+    </div>
   </div>
-</div>
   <?php
      $servername = "localhost";
      $username = "dp2";
      $password = "phpdp2";
      $dbname = "dp2php";
-
      // Create connection
      $conn = new mysqli($servername, $username, $password, $dbname);
      // Check connection
      if ($conn === false) {
        die("Connection failed: " . $conn->connect_error);
      }
-
      if ($_SERVER['REQUEST_METHOD'] === 'POST') {
        if ( !empty($_POST['lpassword']) &&
             !empty($_POST['firstName']) &&
@@ -128,12 +129,9 @@
          $lastName = $_POST['lastName'];
          $position = $_POST['position'];
      	   $email = $_POST['email'];
-
          $insertNewUser = "INSERT INTO Staff (FirstName, LastName, Position, Email, Password)
                            VALUES ('$firstName', '$lastName', '$position', '$email', '$password')";
-
          $result = mysqli_query($connection, $insertNewUser);
-
          if($conn->query($insertNewUser) === TRUE) {
           echo "User succesfully created.";
      		  echo "Your Staff ID: " . mysqli_insert_id($conn);
