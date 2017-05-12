@@ -1,0 +1,30 @@
+.block {
+  height: 300px;
+  padding-top: 15px;
+}
+
+.center {
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
+.right {
+  float: right;
+}
+
+#spacing {
+  padding-top: 20px;
+}
+
+.alert {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 200px;
+  margin: auto;
+  color: red;
+  font-weight: 900;
+  font-size: large;
+}
