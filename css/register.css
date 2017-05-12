@@ -22,3 +22,36 @@
 #spacing {
   padding-top: 20px;
 }
+
+.alert {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 100px;
+  margin: auto;
+  color: green;
+  font-weight: 900;
+  font-size: large;
+}
+
+.alert2 {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 80px;
+  margin: auto;
+  color: green;
+  font-weight: 900;
+  font-size: large;
+}
+
+.alert3 {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 80px;
+  margin: auto;
+  color: red;
+  font-weight: 900;
+  font-size: large;
+}

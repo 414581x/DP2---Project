@@ -95,7 +95,7 @@
       <br/>
       <div class="form-group">
         <div class="col-xs-6" id="spacing">
-          <a href="index.php" class="btn btn-warning btn-block">Cancel</a>
+          <a href="index.php" class="btn btn-warning btn-block">Back To Login</a>
         </div>
       </div>
       <div class="form-group">
@@ -132,12 +132,13 @@
          $insertNewUser = "INSERT INTO Staff (FirstName, LastName, Position, Email, Password)
                            VALUES ('$firstName', '$lastName', '$position', '$email', '$password')";
          $result = mysqli_query($connection, $insertNewUser);
+
          if($conn->query($insertNewUser) === TRUE) {
-          echo "User succesfully created.";
-     		  echo "Your Staff ID: " . mysqli_insert_id($conn);
+           echo "<div class='alert text-center'>User Successfully Created.</div>";
+           echo "<div class='alert2 text-center'>Your Staff ID: ". mysqli_insert_id($conn) ."</div>";
          }
          else {
-           echo "User registration failed." . $conn->error;
+           echo "<div class='alert3 text-center'>User Registration Failed." . $conn->error . "</div>";
          }
        $conn->close();
        }
